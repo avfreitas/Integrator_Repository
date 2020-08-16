@@ -37,8 +37,8 @@ public class Servlet_03 extends HttpServlet {
 		String resp;
 
 		if (request.isSecure()) 
-			resp = "Acesso feito de forma segura - HTTPS"; 
-		else resp = "Acesso NÃO foi feito de forma segura, SEM HTTS";
+			resp = "Acesso feito de forma segura - https"; 
+		else resp = "Acesso NÃO foi feito de forma segura, SEM https";
 
 		String titulo = "Servlet 03 - Olá QualitSys ...";
 		PrintWriter out = response.getWriter();
