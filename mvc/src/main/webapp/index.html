@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>MVC01 - sem acesso a Banco de Dados !</title>
+<link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body BGCOLOR="#7799FF">
+	<h1>Cadastre-se em nossa Lista de e-mails!</h1>
+	<hr>
+	<form action="mvc" method="post">
+		<input type="hidden" name="action" value="add"> <label
+			class="pad_top">Nome:</label> <input type="text" name="firstName"
+			required><br> <label class="pad_top">Sobrenome:</label>
+		<input type="text" name="lastName" required><br> <label
+			class="pad_top">E-mail:</label> <input type="email" name="email"
+			required><br> <label>&nbsp;</label>
+		<hr>
+		<input type="submit" value="Cadastre-se" class="margin_left">
+	</form>
+</body>
+</html>
