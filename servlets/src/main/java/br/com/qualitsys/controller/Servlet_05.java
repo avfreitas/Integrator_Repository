@@ -75,6 +75,10 @@ public class Servlet_05 extends HttpServlet {
 							"Execução em: " + dtf.format(now) +"</br>"+ 
 							"<H1 ALIGN=CENTER>" + Titulo + "</H1>" +
 							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +
+							"<h2 align=center>" + "Parâmetros definidos no servidor" + "</h2" + "<br>"  +
+							"<h2 align=center>" +"@WebInitParam(name = PARAM1, value = QUALITSYS) " + "</h2" + "<br>"  +
+							"<h2 align=center>" +"@WebInitParam(name = PARAM2, value = 5) " + "</h2" + "<br>"  +
+							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +
 							"<h2 ALIGN=CENTER> PARAM1 = " + param1 + "</h2>" +
 							"<h2 ALIGN=CENTER> PARAM2 = " + param2 + "</h2>" +
 							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +

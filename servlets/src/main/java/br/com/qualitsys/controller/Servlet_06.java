@@ -45,20 +45,27 @@ public class Servlet_06 extends HttpServlet {
 		
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
-	    String Titulo = "SERVLET_06 - Coletando dados de um FORM HTML - Método HTTP - GET";
-	  	out.println(	
-	                "<HTML>" +
-	                "<HEAD><TITLE>" + Titulo  + "</TITLE></HEAD>" +
-	                "<BODY BGCOLOR=\"#6699FF\">" +
-	                "<H1 ALIGN=\"CENTER\">" + Titulo + "</H1>" +
-	                "<UL>" +
-	                "<LI><B>param1</B>: "
-	                + request.getParameter("param1")  +
-	                "<LI><B>param2</B>: "
-	                + request.getParameter("param2")  +
-	                "</UL>" +
-	                "</BODY></HTML>"
-	     );
+	    String Titulo = "Passando dados pela URL - Método GET - Servlet 06";
+	    out.println(
+				"<HTML>" +
+						"<HEAD><TITLE>" + Titulo + "</TITLE></HEAD>" +
+						"<BODY BGCOLOR=\"#6699FF\">" +
+							"Execução em: " + dtf.format(now) +"</br>"+ "<br>" +
+							"Context Path: " + request.getContextPath()  + "</br>"+
+							"Request URI: " + request.getRequestURI() + "</br>"+
+							"Request URL: " + request.getRequestURL() + "</br>"+ 
+						
+							"<H1 ALIGN=CENTER>" + Titulo + "</H1>" +
+							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +
+							
+						
+							"<h2 align=center>" +"http://localhost:8888/servlets/s6?PARAM1=XXX&PARAM2=YYYY" + "</h2" + "<br>"  +
+							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +
+							"<h2 ALIGN=CENTER> PARAM1 = " + request.getParameter("PARAM1")  + "</h2>" +
+							"<h2 ALIGN=CENTER> PARAM1 = " + request.getParameter("PARAM2")  + "</h2>" +
+							"<OL>" + "<HR SIZE=4 WIDTH=50%>" + "</OL>" +
+						"</BODY>" + 
+				"</HTML>");
 	}
 
 
