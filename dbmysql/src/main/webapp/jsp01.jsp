@@ -38,17 +38,16 @@
 			</div>
 			
 			<div class="p-3 mb-2 bg-secondary text-white"> 
-				<h6>Dígito: ${aluno.digito}</h6> 
-				<h6>CPF: ${aluno.cpf}</h6> 
-				
-				<h6>Turma: ${aluno.turma}</h6>
-				<h6>Grupo: ${aluno.grupo}</h6>
-				<h6>Curso: ${aluno.curso}</h6>
-				<h6>Emailpessoal: ${aluno.emailpessoal}</h6>
-				<h6>Emailgoogle: ${aluno.emailgoogle}</h6>
-				<h6>Fone1: ${aluno.fone1}</h6>
-				<h6>Fone2: ${aluno.fone2}</h6>
-				<h6>Semestre: ${aluno.semestre}</h6>
+				<p>Dígito: ${aluno.digito}</p>
+				<p>CPF: ${aluno.cpf}</p>
+				<p>Turma: ${aluno.turma}</p>
+				<p>Grupo: ${aluno.grupo}</p>
+				<p>Curso: ${aluno.curso}</p>
+				<p>Emailpessoal: ${aluno.emailpessoal}</p>
+				<p>Emailgoogle: ${aluno.emailgoogle}</p>
+				<p>Fone1: ${aluno.fone1}</p>
+				<p>Fone2: ${aluno.fone2}</p>
+				<p>Semestre: ${aluno.semestre}</p>
 			</div>
 				
 		</div>
