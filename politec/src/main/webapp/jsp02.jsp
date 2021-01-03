@@ -16,6 +16,7 @@
 
 <body>
 	<%
+	
 		if(session.getAttribute("usuario") == null)
 			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 	
@@ -30,22 +31,42 @@
 			<hr>
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
+			<hr>
+		</div>
 		
-			<hr>
-			<p> <% out.print("Usuário logado: <b>" + session.getAttribute("usuario") + "</b>"); %>
-			<hr>
-			<form class="form-inline" action="controller01" method = "post">
-  				<label for="codaluno" class="mr-sm-2">Código do Aluno:</label>
-  				<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Digite aqui" name = "codaluno" id="codaluno">
-  				<button type="submit" class="btn btn-primary mb-2">Submit</button>
+		<div class="container">
+		
+			<div class="p-3 mb-2 bg-success text-white"> 
+				<h6>Código do Aluno:  <b>${aluno.RA}</b></h6>
+				<h6>Nome: <b>${aluno.nome}</b></h6>
+			</div>
+			
+			<div class="p-3 mb-2 bg-secondary text-white"> 
+				<p>Dígito: ${aluno.digito}</p>
+				<p>CPF: ${aluno.cpf}</p>
+				<p>Turma: ${aluno.turma}</p>
+				<p>Grupo: ${aluno.grupo}</p>
+				<p>Curso: ${aluno.curso}</p>
+				<p>Emailpessoal: ${aluno.emailpessoal}</p>
+				<p>Emailgoogle: ${aluno.emailgoogle}</p>
+				<p>Fone1: ${aluno.fone1}</p>
+				<p>Fone2: ${aluno.fone2}</p>
+				<p>Semestre: ${aluno.semestre}</p>
+			</div>
+	
+			<form class="form-inline"  action = "jsp01.jsp" method = "post">
+  				<button type="submit" class="btn btn-primary mb-2">Nova Consulta</button>
 			</form>
-			<hr>
+		
+
 			<form class="form-inline" action="jspfim.jsp">
   				<button type="submit" class="btn btn-primary mb-2">Logout</button>
 			</form>
-		 
+	
+	
 		</div>
-	 </div>
+	</div>
+	
 	</body>
 </html>
 
