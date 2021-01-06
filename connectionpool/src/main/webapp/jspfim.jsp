@@ -16,6 +16,9 @@
 
 <body>
 	<%
+		if(session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now); 
@@ -28,24 +31,17 @@
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
 			<hr>
-		
-			<form class="form-inline" action="LoginServlet"
-				method="post">
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputEmail">Email</label> 
-					<input type="email" class="form-control" name=usuario id="inputEmail"
-						placeholder="Email" required>
-				</div>
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputPassword">Password</label> 
-					<input type="password" class="form-control" name=password id="inputPassword"
-						placeholder="Password" required>
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-			</form>
+
+			<div class="alert alert-success">
+    			<strong>Grato pelo uso do Sistema! Logout processado!</strong>  
+  			</div>
 				
-			
+			<% 
+				String jsessionId = session.getId(); 
+				session.invalidate(); 
+			 %>
+		
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

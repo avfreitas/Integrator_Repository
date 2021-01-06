@@ -16,6 +16,10 @@
 
 <body>
 	<%
+	
+		if(session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now); 
@@ -28,24 +32,41 @@
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
 			<hr>
-		
-			<form class="form-inline" action="LoginServlet"
-				method="post">
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputEmail">Email</label> 
-					<input type="email" class="form-control" name=usuario id="inputEmail"
-						placeholder="Email" required>
-				</div>
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputPassword">Password</label> 
-					<input type="password" class="form-control" name=password id="inputPassword"
-						placeholder="Password" required>
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-			</form>
-				
-			
 		</div>
-	</div>	
-</body>
+		
+		<div class="container">
+		
+			<div class="p-3 mb-2 bg-success text-white"> 
+				<h6>Código do Aluno:  <b>${aluno.RA}</b></h6>
+				<h6>Nome: <b>${aluno.nome}</b></h6>
+			</div>
+			
+			<div class="p-3 mb-2 bg-secondary text-white"> 
+				<p>Dígito: ${aluno.digito}</p>
+				<p>CPF: ${aluno.cpf}</p>
+				<p>Turma: ${aluno.turma}</p>
+				<p>Grupo: ${aluno.grupo}</p>
+				<p>Curso: ${aluno.curso}</p>
+				<p>Emailpessoal: ${aluno.emailpessoal}</p>
+				<p>Emailgoogle: ${aluno.emailgoogle}</p>
+				<p>Fone1: ${aluno.fone1}</p>
+				<p>Fone2: ${aluno.fone2}</p>
+				<p>Semestre: ${aluno.semestre}</p>
+			</div>
+	
+			<form class="form-inline"  action = "jsp01.jsp" method = "post">
+  				<button type="submit" class="btn btn-primary mb-2">Nova Consulta</button>
+			</form>
+		
+
+			<form class="form-inline" action="jspfim.jsp">
+  				<button type="submit" class="btn btn-primary mb-2">Logout</button>
+			</form>
+	
+	
+		</div>
+	</div>
+	
+	</body>
 </html>
+

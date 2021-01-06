@@ -33,6 +33,25 @@
 			<version>8.0.22</version>
 		</dependency>
 
+		<!-- Lib para implementar Connection Pool -->
+		<!-- HikariCP is fast, reliable, and simple. -->
+		<!-- It is one of the preferred solutions for Connection Pooling. -->
+		<!-- Frameworks like Spring Boot 2.x uses it as a default connection manager. -->
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa -->
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.jpa</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

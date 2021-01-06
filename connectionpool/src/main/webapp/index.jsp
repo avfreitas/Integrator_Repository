@@ -43,8 +43,6 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
-				
-			
 		</div>
 	</div>	
 </body>

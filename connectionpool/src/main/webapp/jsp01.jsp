@@ -16,6 +16,9 @@
 
 <body>
 	<%
+		if(session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now); 
@@ -27,25 +30,22 @@
 			<hr>
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
-			<hr>
 		
-			<form class="form-inline" action="LoginServlet"
-				method="post">
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputEmail">Email</label> 
-					<input type="email" class="form-control" name=usuario id="inputEmail"
-						placeholder="Email" required>
-				</div>
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputPassword">Password</label> 
-					<input type="password" class="form-control" name=password id="inputPassword"
-						placeholder="Password" required>
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
+			<hr>
+			<p> <% out.print("Usuário logado: <b>" + session.getAttribute("usuario") + "</b>"); %>
+			<hr>
+			<form class="form-inline" action="controller01" method = "post">
+  				<label for="codaluno" class="mr-sm-2">Código do Aluno:</label>
+  				<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Digite aqui" name = "codaluno" id="codaluno">
+  				<button type="submit" class="btn btn-primary mb-2">Submit</button>
 			</form>
-				
-			
+			<hr>
+			<form class="form-inline" action="jspfim.jsp">
+  				<button type="submit" class="btn btn-primary mb-2">Logout</button>
+			</form>
+		 
 		</div>
-	</div>	
-</body>
+	 </div>
+	</body>
 </html>
+

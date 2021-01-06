@@ -18,8 +18,8 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import br.com.qualitsys.model.Aluno;
 
-@WebServlet("/controller01")
-public class controller01 extends HttpServlet {
+@WebServlet("/controller02")
+public class controller02 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -88,7 +88,7 @@ public class controller01 extends HttpServlet {
 		 * 
 		 */ 
 
-	public controller01() {
+	public controller02() {
 		super();
 
 	}
@@ -102,8 +102,8 @@ public class controller01 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
 
-		String codaluno = request.getParameter("codaluno");
-		request.setAttribute("codaluno", codaluno);
+		String cpfaluno = request.getParameter("cpfaluno");
+		//request.setAttribute("codaluno", codaluno);
 
 		Connection conn = pedeConexao(); 
 
@@ -115,12 +115,12 @@ public class controller01 extends HttpServlet {
 			
 			String preparedSQL = 
 					"SELECT RA, digito, cpf, nome, turma, grupo, curso, emailpessoal, emailgoogle, fone1, fone2, semestre "
-							+ "FROM tabalunos WHERE RA = ?";
+							+ "FROM tabalunos WHERE CPF = ?";
 			try {
 				PreparedStatement ps = conn.prepareStatement(preparedSQL);
-				ps.setString(1, codaluno);
+				ps.setString(1, cpfaluno);
 				ResultSet rs = ps.executeQuery();
-
+				
 				String RA = null;
 				String digito = null;
 				String cpf = null;
@@ -135,6 +135,7 @@ public class controller01 extends HttpServlet {
 				String semestre = null;
 
 				while (rs.next() ) {
+					
 					RA = rs.getString("RA");
 					digito = rs.getString("digito");
 					cpf = rs.getString("cpf");

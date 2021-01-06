@@ -23,10 +23,10 @@ public class controller01 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	/* -------------------------------------------------------------------------------------------------------
-
+/* -------------------------------------------------------------------------------------------------------
+ 
 	 HikariCP Configuration:
-     -----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 	We can use Java based configuration or we can use property file to configure HikariCP. 
 	Let’s have a look at below properties.
 
@@ -44,11 +44,10 @@ public class controller01 extends HttpServlet {
 	minimumIdle: Minimum number of connection objects needs to remain in the pool at any time.
 
 	maximumPoolSize: Maximum number of connections that can stay in the pool.
-	 * 
-	 * */
+* 
+* */
 	private static HikariDataSource dataSource = null;
 
-	/*
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -58,36 +57,12 @@ public class controller01 extends HttpServlet {
 		config.addDataSourceProperty("minimumIdle", "5");
 		config.addDataSourceProperty("maximumPoolSize", "25");
 		config.addDataSourceProperty("cachePrepStmts", "true");
-		config.addDataSourceProperty("prepStmtCacheSize", "250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+		
 		dataSource = new HikariDataSource(config);
-
-*/
-		/*--------------------------------------------------------------------------------------------------------------
-		 * 
-		 * Configuração do Connection Pool para a Integrator:
-		 * 
-*/
-	 static {
-		HikariConfig config = new HikariConfig();
-		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
-		config.setUsername("qualitsy_politec");
-		config.setPassword("#MHmarcam#99#");
-		config.addDataSourceProperty("minimumIdle", "5");
-		config.addDataSourceProperty("maximumPoolSize", "25");
-		config.addDataSourceProperty("cachePrepStmts", "true");
-		config.addDataSourceProperty("prepStmtCacheSize", "250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
-		dataSource = new HikariDataSource(config);
-	   }
-/* 
-		 * 
-		 * 
-		 */ 
-
+	}
+	
 	public controller01() {
 		super();
 
@@ -112,7 +87,6 @@ public class controller01 extends HttpServlet {
 			getServletContext().getRequestDispatcher("/index.jsp").include(request, response);
 		}
 		else  {
-			
 			String preparedSQL = 
 					"SELECT RA, digito, cpf, nome, turma, grupo, curso, emailpessoal, emailgoogle, fone1, fone2, semestre "
 							+ "FROM tabalunos WHERE RA = ?";
@@ -150,7 +124,7 @@ public class controller01 extends HttpServlet {
 				}
 
 				if (RA == null) {
-					out.println("<font color=" + "red>" + "<b>Aluno não existente!!!</b>" + "<font color=" + "black>");
+					out.println("Aluno não existente!!!");
 					conn.close();
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
@@ -160,12 +134,10 @@ public class controller01 extends HttpServlet {
 							new Aluno (RA, digito, cpf, nome, turma, grupo, curso, emailpessoal, emailgoogle, fone1, fone2, semestre);
 
 					request.setAttribute("aluno", aluno);
-					
 					conn.close();
 					getServletContext().getRequestDispatcher("/jsp02.jsp").include(request, response); }
-					
-			} catch (SQLException e) {
 
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
@@ -174,22 +146,22 @@ public class controller01 extends HttpServlet {
 	//*---------------------------------------------------------------------------
 	public static Connection pedeConexao() {
 
-		Connection conn = null;
+			Connection conn = null;
 
-		try {
-			conn = dataSource.getConnection();
-		} 
-
-		catch (SQLException e) {
-			e.printStackTrace(); 
-			return null;
-		} 
-
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
-		return conn; 
+			try {
+				conn = dataSource.getConnection();
+			} 
+			
+			catch (SQLException e) {
+				e.printStackTrace(); 
+				return null;
+			} 
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			} 
+			return conn; 
+		}
+		//*---------------------------------------------------------------------------------
 	}
-	//*---------------------------------------------------------------------------------
-}

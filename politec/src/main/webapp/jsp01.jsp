@@ -37,9 +37,18 @@
 			<form class="form-inline" action="controller01" method = "post">
   				<label for="codaluno" class="mr-sm-2">Código do Aluno:</label>
   				<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Digite aqui" name = "codaluno" id="codaluno">
-  				<button type="submit" class="btn btn-primary mb-2">Submit</button>
+  				<button type="submit" class="btn btn-primary mb-2">Submit com Código do Aluno</button>
 			</form>
 			<hr>
+			
+			<form class="form-inline" action="controller02" method = "post">
+  				<label for="cpfaluno" class="mr-sm-2">CPF  do  Aluno :</label>
+  				<input type="text" class="form-control mb-2 mr-sm-2" placeholder="Digite aqui" name = "cpfaluno" id="codaluno">
+  				<button type="submit" class="btn btn-primary mb-2">Submit com CPF do Aluno</button>
+			</form>
+			<hr>
+			
+			
 			<form class="form-inline" action="jspfim.jsp">
   				<button type="submit" class="btn btn-primary mb-2">Logout</button>
 			</form>

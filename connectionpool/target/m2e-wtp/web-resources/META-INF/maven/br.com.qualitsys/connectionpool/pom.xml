@@ -3,13 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.qualitsys</groupId>
-	<artifactId>politec</artifactId>
+	<artifactId>connectionpool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Projeto - Recuperação de dados de Estudantes - Escola Politécnica
-	</name>
-	<description>Projeto - Recuperação de dados de Estudantes - Escola
-		Politécnica</description>
+	<name>Apache Connection Pool</name>
+	<description>Aplicação para uso do Apache DBCP Connection Pool</description>
 
 	<properties>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
@@ -45,13 +43,6 @@
 			<version>3.4.5</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa -->
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -67,3 +58,7 @@
 		</plugins>
 	</build>
 </project>
+
+
+
+

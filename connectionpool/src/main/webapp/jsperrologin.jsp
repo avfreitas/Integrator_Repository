@@ -28,24 +28,12 @@
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
 			<hr>
-		
-			<form class="form-inline" action="LoginServlet"
-				method="post">
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputEmail">Email</label> 
-					<input type="email" class="form-control" name=usuario id="inputEmail"
-						placeholder="Email" required>
-				</div>
-				<div class="form-group mr-2">
-					<label class="sr-only" for="inputPassword">Password</label> 
-					<input type="password" class="form-control" name=password id="inputPassword"
-						placeholder="Password" required>
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-			</form>
-				
 			
+			<div class="alert alert-dark">
+    			<strong>Acesso não permitido!  Necessário Login de Usuário!</strong> 
+  			</div>
+					
 		</div>
-	</div>	
+	</div>
 </body>
 </html>
