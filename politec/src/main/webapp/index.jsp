@@ -2,8 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter"%>
 	
-	
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -23,6 +23,7 @@
 	
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
+		
 			<h1>USCS - Escola Politécnica - Sistema de Ocorrências</h1>
 			<hr>
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
@@ -43,9 +44,8 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
-				
 			
-		</div>
+    	</div>
 	</div>	
 </body>
 </html>

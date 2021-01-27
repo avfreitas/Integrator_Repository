@@ -24,28 +24,18 @@ public class LoginServlet extends HttpServlet {
 	static {
 			listaUser.add(new User("aparecidovfreitas@gmail.com", "mhmarcam"));
 			listaUser.add(new User("mario.longato@prof.uscs.edu.br", "maggiecindy"));
+			listaUser.add(new User("ricardo.mendonca@prof.uscs.edu.br","#MestreRicardo#2021"));
 			listaUser.add(new User("renato.duarte@prof.uscs.edu.br", "carioca"));
 	} 
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	 
 	public LoginServlet() {
-		super();
-		// TODO Auto-generated constructor stub
+		 
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
-
 	}
 	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
@@ -56,10 +46,6 @@ public class LoginServlet extends HttpServlet {
 		String usuario = request.getParameter("usuario");  
 		String password = request.getParameter("password");  
 		
-		//consulta de usuário é válido
-
-		//if (usuario.equals("mario.longato@prof.uscs.edu.br") && (password.equals("maggiecindy"))) {
-
 		if (validaUser(usuario, password)) {
 			session.setAttribute("usuario", usuario);
 			getServletContext().getRequestDispatcher("/jsp01.jsp").forward(request, response);

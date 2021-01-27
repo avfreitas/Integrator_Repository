@@ -44,11 +44,15 @@ public class controller01 extends HttpServlet {
 	minimumIdle: Minimum number of connection objects needs to remain in the pool at any time.
 
 	maximumPoolSize: Maximum number of connections that can stay in the pool.
-	 * 
-	 * */
-	private static HikariDataSource dataSource = null;
+	
+  
+	------------------------------------------------------------------------------------------------------ */
+	
+ 	private static HikariDataSource dataSource = null;
 
-	/*
+ 	
+/*
+	
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -63,16 +67,21 @@ public class controller01 extends HttpServlet {
 
 		dataSource = new HikariDataSource(config);
 
+	}
+	
 */
 		/*--------------------------------------------------------------------------------------------------------------
 		 * 
 		 * Configuração do Connection Pool para a Integrator:
 		 * 
-*/
+		 * -------------------------------------------------------------------------------------------------------------
+		 */
+  
 	 static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		//  config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
 		config.setUsername("qualitsy_politec");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
@@ -83,14 +92,10 @@ public class controller01 extends HttpServlet {
 
 		dataSource = new HikariDataSource(config);
 	   }
-/* 
-		 * 
-		 * 
-		 */ 
-
+ 
+		 
 	public controller01() {
-		super();
-
+	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

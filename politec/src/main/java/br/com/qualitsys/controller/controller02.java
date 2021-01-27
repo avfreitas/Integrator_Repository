@@ -48,7 +48,7 @@ public class controller02 extends HttpServlet {
 	 * */
 	private static HikariDataSource dataSource = null;
 
-	/*
+ /*
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -62,17 +62,22 @@ public class controller02 extends HttpServlet {
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
 		dataSource = new HikariDataSource(config);
+}
 
 */
+ 
 		/*--------------------------------------------------------------------------------------------------------------
 		 * 
 		 * Configuração do Connection Pool para a Integrator:
 		 * 
-*/
+		 * -------------------------------------------------------------------------------------------------------------*/
+	
+ 
 	 static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		//config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
 		config.setUsername("qualitsy_politec");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
@@ -82,15 +87,10 @@ public class controller02 extends HttpServlet {
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
 		dataSource = new HikariDataSource(config);
-	   }
-/* 
-		 * 
-		 * 
-		 */ 
+	}
+  
 
 	public controller02() {
-		super();
-
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -103,8 +103,7 @@ public class controller02 extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 		String cpfaluno = request.getParameter("cpfaluno");
-		//request.setAttribute("codaluno", codaluno);
-
+				
 		Connection conn = pedeConexao(); 
 
 		if ( conn == null ) {
