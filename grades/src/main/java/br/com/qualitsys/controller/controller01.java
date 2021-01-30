@@ -49,6 +49,12 @@ public class controller01 extends HttpServlet {
 	 * */
 	private static HikariDataSource dataSource = null;
 
+ 
+/*	
+	//*----------------------------------------------------------------------------------- 
+	//*---- Configuração do Connection Pool para a MySQL local 
+	//*-----------------------------------------------------------------------------------
+	
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -64,15 +70,18 @@ public class controller01 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 	}
 
-	/*----------------------------------------------------------------------------------- 
-	 * 
-	 * Configuração do Connection Pool para a Integrator:
-	 * ----------------------------------------------------------------------------------
-/*
+*/ 
+
+	//*----------------------------------------------------------------------------------- 
+	//*---- Configuração do Connection Pool para a Integrator:
+	//*-----------------------------------------------------------------------------------
+ 
+	
+ 
 	 static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
 		config.setUsername("qualitsy_politec");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
@@ -83,8 +92,10 @@ public class controller01 extends HttpServlet {
 
 		dataSource = new HikariDataSource(config);
 	   }
-	 */
-
+	 
+  
+	
+	
 	public controller01() {
 
 	}
@@ -106,20 +117,22 @@ public class controller01 extends HttpServlet {
 		}
 		else  {
 
-			String preparedSQL = 
-					"SELECT * FROM tabcursos";
+			String preparedSQL = "SELECT * FROM tabcursos";
+			
 			try {
 				PreparedStatement ps = conn.prepareStatement(preparedSQL);
 				ResultSet rs = ps.executeQuery();
+			
 
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Cursos!!!</b>" + "<font color=" + "black>");
-					conn.close();
+					conn.close(); 
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
 
 				else {
-
+					
+					
 					Integer idCurso = null;
 					String nomeCurso = null;
 
@@ -132,6 +145,7 @@ public class controller01 extends HttpServlet {
 						curso = new Curso(idCurso,nomeCurso);
 						listaCursos.add(curso);
 					}
+					conn.close(); 
 					
 					HttpSession session = request.getSession(); 
 					
@@ -142,7 +156,7 @@ public class controller01 extends HttpServlet {
 					session.setAttribute("listaCursos", listaCursos);
 
 					getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);  
-					conn.close();
+			
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

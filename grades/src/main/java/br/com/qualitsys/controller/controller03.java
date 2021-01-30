@@ -48,8 +48,11 @@ public class controller03 extends HttpServlet {
 	maximumPoolSize: Maximum number of connections that can stay in the pool.
 	 * 
 	 * */
+	
 	private static HikariDataSource dataSource = null;
- 	 
+
+	
+/*
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -65,15 +68,15 @@ public class controller03 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 }
  
-		/*----------------------------------------------------------------------------------- 
-		 * 
-		 * Configuração do Connection Pool para a Integrator:
-		 * ----------------------------------------------------------------------------------
-/*
+*/ 
+		//*--------------------------------------------------------------------------------- 
+		//*-------------- Configuração do Connection Pool para a Integrator:
+		//*---------------------------------------------------------------------------------
+ 
 	 static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
 		config.setUsername("qualitsy_politec");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
@@ -84,7 +87,7 @@ public class controller03 extends HttpServlet {
 
 		dataSource = new HikariDataSource(config);
 	   }
-*/
+ 
 
 	public controller03() {
 	
@@ -128,8 +131,7 @@ public class controller03 extends HttpServlet {
 		out.println("Ano da Grade Escolhida: " + anoGradeEscolhida);
 		out.println("Semestre da Grade Escolhida: " + semestreGradeEscolhida);
 	
-	 
-		//Salva na Session os dados da grade escolhida
+	 	//Salva na Session os dados da grade escolhida
 		
 		session.setAttribute("idGradeEscolhida",idGradeEscolhida);
 		session.setAttribute("anoGradeEscolhida",anoGradeEscolhida);
@@ -155,6 +157,7 @@ public class controller03 extends HttpServlet {
 				PreparedStatement ps = conn.prepareStatement(preparedSQL);
 				ps.setString(1, idGradeEscolhida);
 				ResultSet rs = ps.executeQuery();
+				
 			
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Grades!!!</b>" + "<font color=" + "black>");
@@ -163,6 +166,7 @@ public class controller03 extends HttpServlet {
 				}
 				
 				else {
+							
 							Integer grupo = null;
 							Integer idDisciplina = null;
 							String nomeDisciplina = null;
@@ -182,12 +186,14 @@ public class controller03 extends HttpServlet {
 								
 								listagemGrade.add(rj);
 							}
+							
+							conn.close();
 						
 							//Salva no Request a Listagem da Grade para ser usada pela view jsp04
 							request.setAttribute("listagemGrade", listagemGrade);
 						
 							getServletContext().getRequestDispatcher("/jsp04.jsp").forward(request, response);  
-							conn.close();
+						 
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -49,7 +49,13 @@ public class controller02 extends HttpServlet {
 	 * 
 	 * */
 	private static HikariDataSource dataSource = null;
- 	 
+	
+	//*----------------------------------------------------------------------------------- 
+	//*------- Configuração do Connection Pool para a MySQL local
+	//* ----------------------------------------------------------------------------------
+
+/*
+  
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -65,15 +71,15 @@ public class controller02 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 }
  
-		/*----------------------------------------------------------------------------------- 
-		 * 
-		 * Configuração do Connection Pool para a Integrator:
-		 * ----------------------------------------------------------------------------------
-/*
+*/
+		//*----------------------------------------------------------------------------------- 
+		//*------- Configuração do Connection Pool para a Integrator:
+		//* ----------------------------------------------------------------------------------
+ 
 	 static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
+		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
 		config.setUsername("qualitsy_politec");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
@@ -84,7 +90,8 @@ public class controller02 extends HttpServlet {
 
 		dataSource = new HikariDataSource(config);
 	   }
-*/
+
+  
 
 	public controller02() {
 	
@@ -138,6 +145,7 @@ public class controller02 extends HttpServlet {
 				PreparedStatement ps = conn.prepareStatement(preparedSQL);
 				ps.setString(1, idcurso);
 				ResultSet rs = ps.executeQuery();
+				
 			
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Grades!!!</b>" + "<font color=" + "black>");
@@ -146,7 +154,7 @@ public class controller02 extends HttpServlet {
 				}
 				
 				else {
-							
+						 
 							String idGrade = null;
 							String ano = null;
 							String semestreGrade = null;
@@ -163,6 +171,7 @@ public class controller02 extends HttpServlet {
 													 
 								listaGrades.add(grade);
 							}
+							conn.close();
 							
 							//Salva na Session a Lista de Grades para ser usar pela view jsp03
 							session.setAttribute("listaGrades", listaGrades);
@@ -171,7 +180,7 @@ public class controller02 extends HttpServlet {
 							session.setAttribute("listaGrades", listaGrades);
 							
 							getServletContext().getRequestDispatcher("/jsp03.jsp").forward(request, response);  
-							conn.close();
+						 
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
