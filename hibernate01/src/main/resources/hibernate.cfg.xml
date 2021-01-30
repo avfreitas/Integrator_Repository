@@ -6,23 +6,30 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- JDBC Database connection settings -->
-
-
-    
+		
+		
+  
 		<!-- JDBC Database configuracao para localhost -->
-<!--  
+ <!--    
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property> 
 		<property name="connection.url">jdbc:mysql://localhost:3307/alunos?useTimezone=true&amp;serverTimezone=UTC</property> 
 		<property name="connection.username">root</property> 
 		<property name="connection.password">maua</property> 
--->
+ -->		
+ 	
+ 	
+ 		
  		<!-- JDBC Database configuracao para Integrator -->
-	 	
+
+  
+	
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property> 
-		<property name="connection.url">jdbc:mysql://209.172.51.58:3306/qualitsy_politec?useTimezone=true&amp;serverTimezone=UTC</property>  
+ 	    <property name="connection.url">jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&amp;serverTimezone=UTC</property>   
 		<property name="connection.username">qualitsy_politec</property> 
 		<property name="connection.password">#MHmarcam#99#</property> 
-		
+
+ 
+
  		<!-- JDBC connection pool settings ... using built-in test pool -->
 		<property name="connection.pool_size">1</property>
 

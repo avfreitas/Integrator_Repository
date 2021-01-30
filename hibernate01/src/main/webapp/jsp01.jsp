@@ -40,7 +40,7 @@
 			<hr>
 		
 			<form class="form-inline" action="jspfim.jsp">
-  				<button type="submit" class="btn btn-primary mb-2">Logout</button>
+  				<button type="submit" class="btn btn-danger mb-2">Logout</button>
 			</form>
 		 
 		</div>

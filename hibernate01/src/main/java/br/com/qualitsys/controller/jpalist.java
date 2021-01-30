@@ -1,5 +1,6 @@
 package br.com.qualitsys.controller;
 import java.io.IOException;
+import java.io.PrintWriter;
 //import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class jpalist extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		PrintWriter out = response.getWriter();
+				
 		Transaction transaction = null;
 
 		try  {
@@ -35,6 +38,9 @@ public class jpalist extends HttpServlet {
 			transaction = session.beginTransaction();
 
 			List<Aluno> listaAlunosAtivos = session.createQuery("from Aluno a order by a.nome", Aluno.class).list();
+			
+			session.close();
+			
 			
 			List<String> listaNomesAlunosAtivos = new ArrayList<String>(); 
 			List<String> listaRAAlunosAtivos = new ArrayList<String>(); 
@@ -48,13 +54,13 @@ public class jpalist extends HttpServlet {
 		 
 			request.setAttribute("listaNomesAlunosAtivos", listaNomesAlunosAtivos);
 			request.setAttribute("listaRAAlunosAtivos", listaRAAlunosAtivos);
+			
 				
 			getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);
-		
-			session.close();
 				
 		} catch (Exception e) {
-
+			
+			out.println("**** Erro de Acesso ao Banco de Dados - Hibernate *** ");
 			if (transaction != null) {
 				transaction.rollback();
 			}
