@@ -85,12 +85,20 @@
 			      </form> 
 			    </div>
 			    
-			    <br><br><br>
+			    <br><hr>
+			    
+			     <div class="container"> 
+					 <form class="form-inline" action="jsp02.jsp">
+			     		<button type="submit" class="btn btn-warning">Retorna para outro curso </button>
+			  		</form>
+			  	</div>
+			    <hr>
 			    <div class="container"> 
 					 <form class="form-inline" action="jspfim.jsp">
 			     		<button type="submit" class="btn btn-primary">Logout</button>
 			  		</form>
 			  	</div>
+			  	<hr>
 		</div>
 	</div>
 	 

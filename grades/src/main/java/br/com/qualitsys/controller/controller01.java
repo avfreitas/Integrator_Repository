@@ -50,7 +50,7 @@ public class controller01 extends HttpServlet {
 	private static HikariDataSource dataSource = null;
 
  
-/*	
+/* 	
 	//*----------------------------------------------------------------------------------- 
 	//*---- Configuração do Connection Pool para a MySQL local 
 	//*-----------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ public class controller01 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 	}
 
-*/ 
+*/
 
 	//*----------------------------------------------------------------------------------- 
 	//*---- Configuração do Connection Pool para a Integrator:
@@ -93,7 +93,7 @@ public class controller01 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 	   }
 	 
-  
+ 
 	
 	
 	public controller01() {
@@ -126,7 +126,10 @@ public class controller01 extends HttpServlet {
 
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Cursos!!!</b>" + "<font color=" + "black>");
+					
+					ps.close();
 					conn.close(); 
+					
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
 
@@ -145,6 +148,9 @@ public class controller01 extends HttpServlet {
 						curso = new Curso(idCurso,nomeCurso);
 						listaCursos.add(curso);
 					}
+					
+					ps.close();
+					rs.close();
 					conn.close(); 
 					
 					HttpSession session = request.getSession(); 

@@ -45,6 +45,23 @@
 			<p><%out.print("Usuário logado: <b>" + session.getAttribute("usuario") + "</b>");%>
 			
 			<hr>
+				    
+			<div class="container"> 
+				 <form class="form-inline" action="jsp03.jsp">
+			     		<button type="submit" class="btn btn-warning">Retorna para outra Grade desse curso </button>
+			  	</form>
+			</div>
+			
+			<hr>
+			<div class="container"> 
+				 <form class="form-inline" action="jspfim.jsp">
+			     		<button type="submit" class="btn btn-primary">Logout</button>
+			  	</form>
+			 </div>
+			
+			 <hr>
+			
+			
 		 	  <div 
 	    	  		class ="container p-3 my-3 bg-primary text-white"> 
 	    	  		<p><%out.print("<h5>Curso: <b>" + session.getAttribute("nomeCursoEscolhido") + "</h5></b>");%>
@@ -83,11 +100,7 @@
 			</table>
 		  	
 		    <br><hr>
-			    <div class="container"> 
-					 <form class="form-inline" action="jspfim.jsp">
-			     		<button type="submit" class="btn btn-primary">Logout</button>
-			  		</form>
-			  	</div>
+			   
 		</div>
 	</div>
 	 

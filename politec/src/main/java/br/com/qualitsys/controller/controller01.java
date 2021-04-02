@@ -156,7 +156,10 @@ public class controller01 extends HttpServlet {
 
 				if (RA == null) {
 					out.println("<font color=" + "red>" + "<b>Aluno não existente!!!</b>" + "<font color=" + "black>");
+					ps.close();
+					rs.close();
 					conn.close();
+					
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
 				else {
@@ -166,6 +169,8 @@ public class controller01 extends HttpServlet {
 
 					request.setAttribute("aluno", aluno);
 					
+					ps.close();
+					rs.close();
 					conn.close();
 					getServletContext().getRequestDispatcher("/jsp02.jsp").include(request, response); }
 					

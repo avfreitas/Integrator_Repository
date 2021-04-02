@@ -51,8 +51,8 @@ public class controller03 extends HttpServlet {
 	
 	private static HikariDataSource dataSource = null;
 
-	
-/*
+/*	
+ 
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -68,7 +68,7 @@ public class controller03 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 }
  
-*/ 
+*/
 		//*--------------------------------------------------------------------------------- 
 		//*-------------- Configuração do Connection Pool para a Integrator:
 		//*---------------------------------------------------------------------------------
@@ -161,6 +161,8 @@ public class controller03 extends HttpServlet {
 			
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Grades!!!</b>" + "<font color=" + "black>");
+					
+					ps.close();
 					conn.close();
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
@@ -187,6 +189,9 @@ public class controller03 extends HttpServlet {
 								listagemGrade.add(rj);
 							}
 							
+							
+							ps.close();
+							rs.close();
 							conn.close();
 						
 							//Salva no Request a Listagem da Grade para ser usada pela view jsp04

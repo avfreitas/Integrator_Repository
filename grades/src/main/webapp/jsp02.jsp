@@ -76,7 +76,7 @@
 			      </form> 
 			    </div>
 			    
-			    <br><br><br>
+			    <br><br><hr>
 			    <div class="container"> 
 					 <form class="form-inline" action="jspfim.jsp">
 			     		<button type="submit" class="btn btn-primary">Logout</button>

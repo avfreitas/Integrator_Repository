@@ -54,8 +54,8 @@ public class controller02 extends HttpServlet {
 	//*------- Configuração do Connection Pool para a MySQL local
 	//* ----------------------------------------------------------------------------------
 
-/*
-  
+ 
+/*  
 	static {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
@@ -91,7 +91,7 @@ public class controller02 extends HttpServlet {
 		dataSource = new HikariDataSource(config);
 	   }
 
-  
+ 
 
 	public controller02() {
 	
@@ -149,6 +149,7 @@ public class controller02 extends HttpServlet {
 			
 				if (rs == null) {
 					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Grades!!!</b>" + "<font color=" + "black>");
+					ps.close();
 					conn.close();
 					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
 				}
@@ -171,6 +172,10 @@ public class controller02 extends HttpServlet {
 													 
 								listaGrades.add(grade);
 							}
+							
+							
+							ps.close();
+							rs.close();
 							conn.close();
 							
 							//Salva na Session a Lista de Grades para ser usar pela view jsp03
