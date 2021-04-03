@@ -36,11 +36,15 @@
 		<!-- Frameworks like Spring Boot 2.x uses it as a default connection manager. -->
 		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 
+		
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			<version>3.4.5</version>
+			<version>4.0.3</version>
 		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>

@@ -80,7 +80,7 @@ public class controller02 extends HttpServlet {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
-		config.setUsername("qualitsy_politec");
+		config.setUsername("qualitsy_grades");
 		config.setPassword("#MHmarcam#99#");
 		config.addDataSourceProperty("minimumIdle", "5");
 		config.addDataSourceProperty("maximumPoolSize", "25");
