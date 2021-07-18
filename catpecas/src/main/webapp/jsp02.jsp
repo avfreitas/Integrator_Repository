@@ -94,7 +94,7 @@
 			<hr>
 			<div class="container">
 				<form class="form-inline" action="jspfim.jsp">
-					<button type="submit" class="btn btn-primary">Logout</button>
+					<button type="submit" class="btn btn-danger">Logout</button>
 				</form>
 			</div>
 

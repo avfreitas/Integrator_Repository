@@ -91,7 +91,8 @@ public class controller02 extends HttpServlet {
 		
 		try {
 			
-			conn = DBHandlerLocal.getConn();
+			//conn = DBHandlerLocal.getConn();
+			conn = DBHandlerIntegrator.getConn();
 
 			String preparedSQL = 
 

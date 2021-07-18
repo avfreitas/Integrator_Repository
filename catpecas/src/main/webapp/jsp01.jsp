@@ -72,12 +72,14 @@
 								out.println(format1 + listaMontadoras.get(i).getCodMontadora() + format2 +
 								listaMontadoras.get(i).getDescMontadora() + format3); %> </select></div>
 								
-				<br><br><hr>
+				<br><hr>
 				
-				<div class="container">	
-				<button name="subcatalogo" type="submit" class="btn btn-success">Clique aqui para exibição do Catálogo</button></div></form>
-		
-		</div>
+				<button name="subcatalogo" type="submit" class="btn btn-success">Clique aqui para exibição do Catálogo</button></form></div>
+				
+				<hr>
+				<div class="container">
+					<form class="form-inline" action="jspfim.jsp">
+						<button type="submit" class="btn btn-danger">Logout</button></form></div>
 	</div>
 </body>
 </html>

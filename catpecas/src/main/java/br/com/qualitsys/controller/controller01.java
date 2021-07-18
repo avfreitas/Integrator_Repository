@@ -37,7 +37,8 @@ public class controller01 extends HttpServlet {
 		Connection conn;
 		try {
 			
-			conn = DBHandlerLocal.getConn();
+			//conn = DBHandlerLocal.getConn();
+			conn = DBHandlerIntegrator.getConn();
 			
 			//------------------------------------------------------------------------
 			//--------------- Carga listBox com categorias  --------------------------
