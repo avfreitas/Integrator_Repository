@@ -3,16 +3,14 @@ package br.com.qualitsys.model;
 public class ResultJoin {
 	
 	private String descmontadora; 
-	private String codproduto;
 	private String mercadoparalelo;
 	private String coditem;
 	private String descitem;
 	private Object imagemitem;
 	
-	public ResultJoin(String descmontadora, String codproduto, String mercadoparalelo, String coditem, String descitem, Object imagemitem) {
+	public ResultJoin(String descmontadora, String mercadoparalelo, String coditem, String descitem, Object imagemitem) {
 		 
 		this.descmontadora = descmontadora;
-		this.codproduto = codproduto;
 		this.mercadoparalelo = mercadoparalelo;
 		this.coditem = coditem;
 		this.descitem = descitem;
@@ -25,14 +23,6 @@ public class ResultJoin {
 
 	public void setDescmontadora(String descmontadora) {
 		this.descmontadora = descmontadora;
-	}
-
-	public String getCodproduto() {
-		return codproduto;
-	}
-
-	public void setCodproduto(String codproduto) {
-		this.codproduto = codproduto;
 	}
 
 	public String getMercadoparalelo() {

@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 	static {
 			listaUser.add(new User("aparecidovfreitas@gmail.com", "mhmarcam"));
 			listaUser.add(new User("leandro@gmail.com", "leandro"));
+			listaUser.add(new User("x@gmail.com", "x"));
 			listaUser.add(new User("mario.longato@prof.uscs.edu.br", "maggiecindy"));
 			listaUser.add(new User("ricardo.mendonca@prof.uscs.edu.br","#MestreRicardo#2021"));
 			listaUser.add(new User("luxfacta@gmail.com","luxfacta"));

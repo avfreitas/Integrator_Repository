@@ -1,16 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page
-	import="java.time.LocalDateTime,java.time.format.DateTimeFormatter"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="br.com.qualitsys.model.Categoria"%>
-
+<%@ page import="br.com.qualitsys.model.Montadora"%>
+<%@ page import="br.com.qualitsys.model.ResultJoin"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Catálago Eletrônico</title>
+<title>Catálogo Eletrônico</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -22,7 +21,7 @@
 </head>
 
 <body>
-	<%! @SuppressWarnings("unchecked") %>
+	<%!@SuppressWarnings("unchecked")%>
 	<%
 		if (session.getAttribute("usuario") == null)
 			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
@@ -30,61 +29,78 @@
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now);
-
-		//Recupera da Session a lista de Categorias criada pelo Controller01
-		ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>) session.getAttribute("listaCategorias");
-		int n = listaCategorias.size();
-	
-		String format1 = "<option style=\"background: #5cb85c; color: #fff;\" value = \"";
-		String format2 = "\">";
-		String format3 = "</option>";
-	
 	%>
 
 	<div class="jumbotron  jumbotron-fluid">
 		<div class="container">
-		    <h1>Catálogo Eletrônico - Peças - Versão 0.0.1</h1>
+			<h1>Catálogo Eletrônico - Peças - Versão 0.0.1</h1>
 			<hr>
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
-			<p><% out.print(dataHoraExecucao); %></p>
+			<p><%out.print(dataHoraExecucao);%></p>
+			<hr>
+			<p><%out.print("Usuário logado: <b>" + session.getAttribute("usuario") + "</b>");%></p>
+			<hr>
+
+			<div class="container p-3 my-3 bg-primary text-white">
+				<p><%out.print("<h5>Categoria: <b>" + session.getAttribute("nomeCategoriaEscolhida") + "</h5></b>");%></p>
+				<p><%out.print("<h5>Montadora: <b>" + session.getAttribute("nomeMontadoraEscolhida") + "</h5></b>");%></p>
+			</div>
+
+			<br>
+			<table class="table table-sm">
+				<thead>
+					<tr>
+						<th scope="col"></th>
+						<th scope="col">Código Interno</th>
+						<th scope="col">Descrição do Item</th>
+						</tr>
+				
+				</thead>
+ 
+				<tbody>
+					<%
+						ArrayList<ResultJoin> listagemItens = (ArrayList<ResultJoin>) session.getAttribute("listagemItens");
+						int n = listagemItens.size();
+					
+						for (int i = 0; i < n; i++) {
+											
+							String mercadoparalelo = listagemItens.get(i).getMercadoparalelo();
+							
+							out.print("<tr>");	
+							out.print("<td><p><img src=" + "imagens/"+ listagemItens.get(i).getCoditem() + ".JPG />" + "</td>");
+							
+							out.print("<td><p>" + listagemItens.get(i).getCoditem() + "  /  ");
+							if (mercadoparalelo.equals("s"))  
+								out.print("   " + listagemItens.get(i).getCoditem() + "A" + "</td>");
+							else 
+								out.print("</td>"); 
+						
+							out.print("<td><p>" + listagemItens.get(i).getDescitem() + "</td>");
+							out.print("</tr>");	
+						}
+					%>
+				</tbody>
+			</table>
+
+			<br>
+			<hr>
+
+			<div class="container">
+				<form class="form-inline" action="jsp01.jsp">
+					<button type="submit" class="btn btn-warning">Retorna</button>
+				</form>
+			</div>
 
 			<hr>
-			<p><%out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%>
-			
-			<hr>
-			<p><%out.print("<p> <font color=\"green\">"+"<b> Selecione abaixo a categoria desejada: </b></p>");%>
-			
-				<div class="container">
-				   <form class="form-inline" action="controller02" method = "post">
-				   
-				     <div class="container"> 
-	    		  	  	<select name="codcategoria" id="codcategoria" class="selectpicker" data-style="btn-success">
-							<%  
-								for (int i=0; i<n; i++)  
-									out.println(format1 + 
-										listaCategorias.get(i).getCodCategoria() + format2 + 
-										listaCategorias.get(i).getDescCategoria() + format3);
-							%>
-		 		       	</select>
-		 		     
-		 		       <br><br>
-				     </div>
-				      
-		 		     <div class="container">
-		 			   		<button name = "codcategoria" type="submit" class="btn btn-success">Submit para Definição da Montadora</button>
-		 			 </div>
-			      </form> 
-			    </div>
-			    
-			    <br><br><hr>
-			    <div class="container"> 
-					 <form class="form-inline" action="jspfim.jsp">
-			     		<button type="submit" class="btn btn-primary">Logout</button>
-			  		</form>
-			  	</div>
+			<div class="container">
+				<form class="form-inline" action="jspfim.jsp">
+					<button type="submit" class="btn btn-primary">Logout</button>
+				</form>
+			</div>
+
 		</div>
 	</div>
-	
- </body>
+
+</body>
 </html>
 

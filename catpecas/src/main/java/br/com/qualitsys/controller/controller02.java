@@ -15,17 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
 import br.com.qualitsys.model.Categoria;
 import br.com.qualitsys.model.Montadora;
-
+import br.com.qualitsys.model.ResultJoin;
 
 //*------------------------------------------------------------------
+//*-- Salva na Session =>  atributo: "listagemItens" 
 //*-- Salva na Session =>  atributo: "nomeCategoriaEscolhida" 
-//*-- Salva na Session =>  atributo: "codcategoria" 
-//*-- Salva na Session =>  atributo: "listaMontadoras" 
+//*-- Salva na Session =>  atributo: "nomeMontadoraEscolhida" 
+//*-- Salva na Session =>  atributo: "codCategoriaEscolhida" 
+//*-- Salva na Session =>  atributo: "codMontadoraEscolhida" 
 //*------------------------------------------------------------------
 
 
@@ -33,75 +32,6 @@ import br.com.qualitsys.model.Montadora;
 public class controller02 extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
-	/* -------------------------------------------------------------------------------------------------------
-	 HikariCP Configuration:
-     -----------------------------------------------------------------------------------------------------------
-	We can use Java based configuration or we can use property file to configure HikariCP. 
-	Let’s have a look at below properties.
-
-	idleTimeout: Time in milliseconds for which connection object can stay in the pool as idle. 
-	It works with minimumIdle and maximumPoolSize properties. After a specified time connection object will be released.
-
-	connectionTimeout:  Time in milliseconds for which the client will wait for connection object from Pool. 
-	If the time limit is reached then SQL Exception will be thrown.
-
-	autoCommit: We can specify true or false and if it is set to true then it will automatically commit 
-	every SQL statements you execute and if it is set to false then we need to commit SQL statements manually
-
-	cachePrepStmts: Enable caching for Prepare Statement
-
-	minimumIdle: Minimum number of connection objects needs to remain in the pool at any time.
-
-	maximumPoolSize: Maximum number of connections that can stay in the pool.
-	 * 
-	 * */
-	private static HikariDataSource dataSource = null;
-
-	//*----------------------------------------------------------------------------------- 
-	//*------- Configuração do Connection Pool para a MySQL local
-	//* ----------------------------------------------------------------------------------
-
-
-
-	static {
-		HikariConfig config = new HikariConfig();
-		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://localhost:3307/catpecas?useTimezone=true&serverTimezone=UTC");
-		config.setUsername("root");
-		config.setPassword("maua");
-		config.addDataSourceProperty("minimumIdle", "5");
-		config.addDataSourceProperty("maximumPoolSize", "25");
-		config.addDataSourceProperty("cachePrepStmts", "true");
-		config.addDataSourceProperty("prepStmtCacheSize", "250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
-		dataSource = new HikariDataSource(config);
-	}
-
-
-	//*----------------------------------------------------------------------------------- 
-	//*------- Configuração do Connection Pool para a Integrator:
-	//* ----------------------------------------------------------------------------------
-
-
-	/*
-	 static {
-		HikariConfig config = new HikariConfig();
-		config.setDriverClassName("com.mysql.cj.jdbc.Driver"); 
-		config.setJdbcUrl("jdbc:mysql://localhost:3306/qualitsy_politec?useTimezone=true&serverTimezone=UTC");
-		config.setUsername("qualitsy_grades");
-		config.setPassword("#MHmarcam#99#");
-		config.addDataSourceProperty("minimumIdle", "5");
-		config.addDataSourceProperty("maximumPoolSize", "25");
-		config.addDataSourceProperty("cachePrepStmts", "true");
-		config.addDataSourceProperty("prepStmtCacheSize", "250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-
-		dataSource = new HikariDataSource(config);
-	   }
-
-	 */
 
 	public controller02() {
 
@@ -117,105 +47,123 @@ public class controller02 extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 		//Recupera do Request a Categoria escolhido pelo usuário
-		String codcategoria = request.getParameter("codcategoria");
-	
+		String codCategoriaEscolhida = request.getParameter("codcategoria");
+		out.println("Categoria escolhida = " + codCategoriaEscolhida);
+
+		//Recupera do Request a Categoria escolhido pelo usuário
+		String codMontadoraEscolhida = request.getParameter("codmontadora");
+		out.println("Montadora escolhida = " + codMontadoraEscolhida);
+
 		HttpSession session = request.getSession(); 
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>)session.getAttribute("listaCategorias");
+		@SuppressWarnings("unchecked")
+		ArrayList<Montadora> listaMontadoras = (ArrayList<Montadora>)session.getAttribute("listaMontadoras");
 
-		//Recupera nome da Categoria escolhida
+		//* ------------------------------------------------
+		//* --  Recupera nome da Categoria escolhida  ------
+		//* ------------------------------------------------
+
 		String nomeCategoriaEscolhida = null;
-		int size = listaCategorias.size();
+		int size1 = listaCategorias.size();
 
-		for (int i=0; i<size;i++) {
-			if(listaCategorias.get(i).getCodCategoria().equals(codcategoria)) {
+		for (int i=0; i<size1;i++)  
+			if(listaCategorias.get(i).getCodCategoria().equals(codCategoriaEscolhida)) {
 				nomeCategoriaEscolhida = listaCategorias.get(i).getDescCategoria();
 				break;
 			}
 
-		}
+		//* ------------------------------------------------
+		//* --  Recupera nome da Montadora escolhida  ------
+		//* ------------------------------------------------
 
-		Connection conn = pedeConexao(); 
+		String nomeMontadoraEscolhida = null;
+		int size2 = listaMontadoras.size();
 
-		if ( conn == null ) {
-			out.println("<b>Erro de Conexão ao Banco de Dados ....</b>");
-			getServletContext().getRequestDispatcher("/jsp02.jsp").include(request, response);
-		}
-		else  {
+		for (int i=0; i<size2;i++)  
+			if(listaMontadoras.get(i).getCodMontadora().equals(codMontadoraEscolhida)) {
+				nomeMontadoraEscolhida = listaMontadoras.get(i).getDescMontadora();
+				break;
+			}
+
+		Connection conn;
+		
+		try {
+			
+			conn = DBHandlerLocal.getConn();
 
 			String preparedSQL = 
-					"SELECT * FROM montadora order by descmontadora";
-			try {
-				PreparedStatement ps = conn.prepareStatement(preparedSQL);
-				ResultSet rs = ps.executeQuery();
 
-				if (rs == null) {
-					out.println("<font color=" + "red>" + "<b>Erro - Acesso Tabela de Montadoras!!!</b>" + "<font color=" + "black>");
-					ps.close();
-					conn.close();
-					getServletContext().getRequestDispatcher("/jsp01.jsp").include(request, response);
-				}
+					"SELECT DISTINCT  M.descmontadora AS Montadora , " + 
+							"T.mercadoparalelo AS 'Mercado Paralelo ', " +
+							"T.coditem AS 'Código Interno ', " + 
+							"T.descitem AS 'Descrição do Ítem ', " +
+							"T.imagemitem AS 'Imagem do Ítem ' " + 
 
-				else {
+							"FROM montadora_item MI " + 
 
-					String codMontadora = null;
-					String descMontadora = null;
+							"INNER JOIN tabitem T " + 
+							"ON  T.coditem = MI.coditem " +  
 
-					Montadora montadora;
-					ArrayList<Montadora> listaMontadoras = new ArrayList<Montadora>();
+							"INNER JOIN aplicacao A  " +  
+							"ON A.coditem = MI.coditem " +
 
-					while (rs.next() ) {
+							"INNER JOIN montadora M " + 
+							"ON  M.codmontadora =? " +
 
-						codMontadora = rs.getString("codmontadora");
-						descMontadora = rs.getString("descmontadora");
-						montadora = new Montadora(codMontadora, descMontadora);
+							"where T.codcategoria =?  " +    
+							"ORDER BY T.coditem , M.descmontadora " ; 
 
-						listaMontadoras.add(montadora);
-					}
+			PreparedStatement ps = conn.prepareStatement(preparedSQL);
 
-					ps.close();
-					rs.close();
-					conn.close();
+			ps.setString(1, codMontadoraEscolhida);
+			ps.setString(2, codCategoriaEscolhida);
+			
 
-					//Salva na Session o nome da Categoria escolhida
-					session.setAttribute("nomeCategoriaEscolhida",nomeCategoriaEscolhida);
+			ResultSet rs = ps.executeQuery();
 
-					//Salva na Session o código da Categoria escolhida
-					session.setAttribute("codcategoria",codcategoria);
+			String descmontadora; 
+			String mercadoparalelo;
+			String coditem;
+			String descitem;
+			Object imagemitem;
 
-					//Salva na Session a Lista de Montadoras para ser usar pela view jsp03
-					session.setAttribute("listaMontadoras", listaMontadoras);
+			ArrayList<ResultJoin> listagemItens = new ArrayList<ResultJoin>();
 
-					getServletContext().getRequestDispatcher("/jsp03.jsp").forward(request, response);  
+			while (rs.next() ) {
 
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+				descmontadora = rs.getString(1);
+				mercadoparalelo = rs.getString(2);
+				coditem = rs.getString(3);
+				descitem = rs.getString(4);
+				imagemitem = rs.getObject(5);
+
+				ResultJoin rj = new 
+						ResultJoin(descmontadora, mercadoparalelo, coditem, descitem, imagemitem); 
+
+				listagemItens.add(rj);
 			}
+
+
+			ps.close();
+			rs.close();
+			conn.close();
+
+			//*-------------------------------------------------------------------
+			//* ------------    Salva dados na Session ---------------------------
+			//* ------------------------------------------------------------------
+
+			session.setAttribute("listagemItens", listagemItens);
+			session.setAttribute("nomeCategoriaEscolhida", nomeCategoriaEscolhida);
+			session.setAttribute("nomeMontadoraEscolhida", nomeMontadoraEscolhida);
+			session.setAttribute("codCategoriaEscolhida", codCategoriaEscolhida);
+			session.setAttribute("codMontadoraEscolhida", codMontadoraEscolhida);
+
+			getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);  
 		}
-
-	}
-
-	//*---------------------------------------------------------------------------
-	public static Connection pedeConexao() {
-
-		Connection conn = null;
-
-		try {
-			conn = dataSource.getConnection();
-		} 
-
 		catch (SQLException e) {
-			e.printStackTrace(); 
-			return null;
-		} 
-
-		catch (Exception e) {
 			e.printStackTrace();
-			return null;
-		} 
-		return conn; 
+		}
 	}
-	//*---------------------------------------------------------------------------------
 }
