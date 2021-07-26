@@ -13,14 +13,10 @@
 <head>
 <meta charset="utf-8">
 <title>Catálogo Eletrônico</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -48,17 +44,21 @@
 
 	<div class="jumbotron  jumbotron-fluid">
 		<div class="container">
-			<h1>Catálogo Eletrônico - Peças - Versão 0.0.1</h1>
+			<h2><strong>Alpha Distribuidora de Auto Peças Ltda.</strong></h2>
 			<hr>
-			<p>Qualitsys Consultoria de Informática Ltda.</p>
-			<p><% out.print(dataHoraExecucao); %></p>
+			<p>Rua João Gottfritz Filho, 75 - Jardim Regis - São Paulo - SP</p>
+			<p>Fones:   11 5662-8252  / 11 3459-7128</p>
+			<p>WhatAapp:   11 99766-2438 / 11 93087-5039</p>
+			<hr>
+			<p><strong>Catálogo Eletrônico de Peças</strong></p>
+			<p> <% out.print(dataHoraExecucao); %> </p>
 			<hr>
 			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
 			<hr>
 			
 			<form class="form-inline" action="controller02" method="post">
 				<div class="container">
-				<p><% out.print("<p> <font color=\"green\">" + "<b> Selecione a categoria:</b>");%></p>
+				<p><% out.print("<p> <font color=\"black\">" + "<b> Selecione a categoria:</b>");%></p>
 				<select name="codcategoria" id="codcategoria" class="selectpicker show-tick" data-style="btn-success">
 							<% for (int i = 0; i < n1; i++)
 								out.println(format1 + listaCategorias.get(i).getCodCategoria() + format2 +
@@ -66,7 +66,7 @@
 				<br><br><hr>
 				
 				<div class="container">
-				<p><% out.print("<p> <font color=\"green\">" + "<b> Selecione a montadora:</b>");%></p>
+				<p><% out.print("<p> <font color=\"black\">" + "<b> Selecione a montadora:</b>");%></p>
 				<select name="codmontadora" id="codmontadora" class="selectpicker show-tick" data-style="btn-success">
 							<% for (int i = 0; i < n2; i++)
 								out.println(format1 + listaMontadoras.get(i).getCodMontadora() + format2 +

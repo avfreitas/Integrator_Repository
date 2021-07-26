@@ -64,7 +64,7 @@ public class DBHandlerIntegrator {
 		ds = new HikariDataSource(config);
 	}
 
-	public static  Connection getConn() throws SQLException {
+	public static  Connection getConn() throws SQLException, javax.servlet.ServletException{
 		return ds.getConnection();
 	}
 

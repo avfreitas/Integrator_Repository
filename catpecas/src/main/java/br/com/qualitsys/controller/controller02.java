@@ -99,16 +99,15 @@ public class controller02 extends HttpServlet {
 					"SELECT DISTINCT  M.descmontadora AS Montadora , " + 
 							"T.mercadoparalelo AS 'Mercado Paralelo ', " +
 							"T.coditem AS 'Código Interno ', " + 
-							"T.descitem AS 'Descrição do Ítem ', " +
-							"T.imagemitem AS 'Imagem do Ítem ' " + 
+							"T.descitem AS 'Descrição do Item ', " +
+							"T.imagemitem AS 'Imagem do Item ', " + 
+							"T.codigosoriginais AS 'Códigos Originais ' " + 
+							
 
 							"FROM montadora_item MI " + 
 
 							"INNER JOIN tabitem T " + 
 							"ON  T.coditem = MI.coditem " +  
-
-							"INNER JOIN aplicacao A  " +  
-							"ON A.coditem = MI.coditem " +
 
 							"INNER JOIN montadora M " + 
 							"ON  M.codmontadora =? " +
@@ -129,8 +128,10 @@ public class controller02 extends HttpServlet {
 			String coditem;
 			String descitem;
 			Object imagemitem;
+			String codigosoriginais;
 
 			ArrayList<ResultJoin> listagemItens = new ArrayList<ResultJoin>();
+		
 
 			while (rs.next() ) {
 
@@ -139,13 +140,15 @@ public class controller02 extends HttpServlet {
 				coditem = rs.getString(3);
 				descitem = rs.getString(4);
 				imagemitem = rs.getObject(5);
+				codigosoriginais = rs.getString(6);
 
 				ResultJoin rj = new 
-						ResultJoin(descmontadora, mercadoparalelo, coditem, descitem, imagemitem); 
+						ResultJoin(descmontadora, mercadoparalelo, coditem, descitem, imagemitem, codigosoriginais); 
 
 				listagemItens.add(rj);
 			}
-
+			
+			//* ----------------------------------------------------------------
 
 			ps.close();
 			rs.close();
@@ -160,8 +163,9 @@ public class controller02 extends HttpServlet {
 			session.setAttribute("nomeMontadoraEscolhida", nomeMontadoraEscolhida);
 			session.setAttribute("codCategoriaEscolhida", codCategoriaEscolhida);
 			session.setAttribute("codMontadoraEscolhida", codMontadoraEscolhida);
-
+				 
 			getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);  
+		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

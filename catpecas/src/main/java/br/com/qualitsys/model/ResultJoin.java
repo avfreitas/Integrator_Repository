@@ -7,14 +7,16 @@ public class ResultJoin {
 	private String coditem;
 	private String descitem;
 	private Object imagemitem;
+	private String codigosoriginais;
 	
-	public ResultJoin(String descmontadora, String mercadoparalelo, String coditem, String descitem, Object imagemitem) {
+	public ResultJoin(String descmontadora, String mercadoparalelo, String coditem, String descitem, Object imagemitem, String codigosoriginais) {
 		 
 		this.descmontadora = descmontadora;
 		this.mercadoparalelo = mercadoparalelo;
 		this.coditem = coditem;
 		this.descitem = descitem;
 		this.imagemitem = imagemitem;
+		this.codigosoriginais = codigosoriginais;
 	}
 
 	public String getDescmontadora() {
@@ -55,6 +57,14 @@ public class ResultJoin {
 
 	public void setImagemitem(Object imagemitem) {
 		this.imagemitem = imagemitem;
+	}
+
+	public String getCodigosoriginais() {
+		return codigosoriginais;
+	}
+
+	public void setCodigosoriginais(String codigosoriginais) {
+		this.codigosoriginais = codigosoriginais;
 	}
 
 	 
