@@ -55,10 +55,9 @@ public class LoginServlet extends HttpServlet {
 		 
 		if (validaUser(usuario, password)) {
 			session.setAttribute("usuario", usuario);
-			getServletContext().getRequestDispatcher("/controller01").forward(request, response);
-
-		}  
-		else{
+		 		getServletContext().getRequestDispatcher("/jspmain.jsp").include(request, response);
+		 	}
+ 		else{
 			out.println("<font color=red>" + "<b> Desculpe, usuário ou password inválidos ! </b>" + "<font color=black>");
 			getServletContext().getRequestDispatcher("/index.jsp").include(request, response);
 		} 

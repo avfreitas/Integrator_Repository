@@ -13,10 +13,14 @@
 <head>
 <meta charset="utf-8">
 <title>Catálogo Eletrônico</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -52,21 +56,19 @@
 			<hr>
 			<p><strong>Catálogo Eletrônico de Peças</strong></p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
-			<hr>
-			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
-			<hr>
+			<hr> 
 			
 			<form class="form-inline" action="controller02" method="post">
 				<div class="container">
-				<p><% out.print("<p> <font color=\"black\">" + "<b> Selecione a categoria:</b>");%></p>
+				<p><% out.print("<p> <font color=\"green\">" + "<b> Selecione a categoria:</b>");%></p>
 				<select name="codcategoria" id="codcategoria" class="selectpicker show-tick" data-style="btn-success">
 							<% for (int i = 0; i < n1; i++)
 								out.println(format1 + listaCategorias.get(i).getCodCategoria() + format2 +
 								listaCategorias.get(i).getDescCategoria() + format3); %> </select></div>
-				<br><br><hr>
+				<br><hr>
 				
 				<div class="container">
-				<p><% out.print("<p> <font color=\"black\">" + "<b> Selecione a montadora:</b>");%></p>
+				<p><% out.print("<p> <font color=\"green\">" + "<b> Selecione a montadora:</b>");%></p>
 				<select name="codmontadora" id="codmontadora" class="selectpicker show-tick" data-style="btn-success">
 							<% for (int i = 0; i < n2; i++)
 								out.println(format1 + listaMontadoras.get(i).getCodMontadora() + format2 +
@@ -75,11 +77,14 @@
 				<br><hr>
 				
 				<button name="subcatalogo" type="submit" class="btn btn-success">Clique aqui para exibição do Catálogo</button></form></div>
-				
+						
 				<hr>
-				<div class="container">
-					<form class="form-inline" action="jspfim.jsp">
-						<button type="submit" class="btn btn-danger">Logout</button></form></div>
+				
+				<div class="container"> 
+					<a class="btn btn-primary" href="jspmain.jsp" role="button">Retorna</a>
+					<hr><br>
+					<a class="btn btn-danger" href="jspfim.jsp" role="button">Logout</a></div>	
+			 
 	</div>
 </body>
 </html>

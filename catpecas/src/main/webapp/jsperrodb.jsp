@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Alpha Distribuidora de Peças Ltda.</title>
+	<title>Catálogo Eletrônico</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,14 +23,14 @@
 	
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
-			<h1>Catálogo Eletrônico - Versão 0.0.1</h1>
+			<h1>**** Erro de Conexão ao Servidor de Banco de Dados ****</h1>
 			<hr>
 			<p>Qualitsys Consultoria de Informática Ltda.</p>
 			<p> <% out.print(dataHoraExecucao); %> </p>
 			<hr>
 			
 			<div class="alert alert-dark">
-    			<strong>Acesso não permitido!  Necessário Login de Usuário!</strong> 
+    			<strong>Entre em contato com o Suporte Técnico - Qualitsys.com</strong> 
   			</div>
 					
 		</div>

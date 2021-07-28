@@ -32,7 +32,7 @@ public class controller01 extends HttpServlet {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 
 		Connection conn;
 		try {
@@ -98,6 +98,7 @@ public class controller01 extends HttpServlet {
 
 		}
 		catch (Exception e) {
+			getServletContext().getRequestDispatcher("/jsperrodb.jsp").forward(request, response);  
 			e.printStackTrace();
 		}
 	}
