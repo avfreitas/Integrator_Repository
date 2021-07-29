@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,12 +34,16 @@ public class controller01 extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		
+		HttpSession session = request.getSession(); 
+		if (session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 
 		Connection conn;
 		try {
 			
-			//conn = DBHandlerLocal.getConn();
-			conn = DBHandlerIntegrator.getConn();
+			conn = DBHandlerLocal.getConn();
+			//conn = DBHandlerIntegrator.getConn();
 			
 			//------------------------------------------------------------------------
 			//--------------- Carga listBox com categorias  --------------------------
@@ -89,8 +94,6 @@ public class controller01 extends HttpServlet {
 			rs.close();
 			conn.close();
 					
-			HttpSession session = request.getSession(); 
-
 			session.setAttribute("listaCategorias", listaCategorias);
 			session.setAttribute("listaMontadoras", listaMontadoras);
 

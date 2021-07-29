@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter"%>
 
 <!DOCTYPE html>
@@ -17,9 +16,10 @@
 	<%!@SuppressWarnings("unchecked")%>
 	<%
 	 
-	 //	if (session.getAttribute("usuario") == null)
-	 //	getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	 	if (session.getAttribute("usuario") == null)
+	 	getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 
+		session.setAttribute("msgerro"," ");
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now);
@@ -42,9 +42,7 @@
 			<hr>
 			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
 			<hr></div>
-		<hr>
-		
-		
+			
 		<div class="container"> 
 				<a class="btn btn-primary " href="jspitem.jsp" role="button">Consulta pelo item da peça</a>
 				<a class="btn btn-success " href="controller01" role="button">Consulta pela categoria/montadora</a></div>	

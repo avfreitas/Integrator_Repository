@@ -12,13 +12,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-
 <body>
-	<%
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");  
-		LocalDateTime now = LocalDateTime.now();  
-		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now); 
-	%>
+
+<%
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss");  
+	LocalDateTime now = LocalDateTime.now();  
+	String dataHoraExecucao = "Execução processada em: " + dtf.format(now); 
+		
+%>
 	
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
@@ -46,6 +47,15 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
+			
+			<% 
+				String msgerro = (String) session.getAttribute("msgerro");
+				if (msgerro == null)  
+					session.setAttribute("msgerro"," ");
+				else if (msgerro.equals("00001") ) 
+						out.print("<div class='alert alert-warning' id = 'msgerro' role='alert'> Desculpe!  Usuário ou Senha inválida!</div>");
+			%>
+		
 		</div>
 	</div>	
 </body>

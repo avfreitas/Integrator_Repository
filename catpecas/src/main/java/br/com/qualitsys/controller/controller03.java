@@ -38,6 +38,10 @@ public class controller03 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession(); 
+		if (session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+		
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -45,8 +49,8 @@ public class controller03 extends HttpServlet {
 		
 		try {
 			
-			//conn = DBHandlerLocal.getConn();
-			conn = DBHandlerIntegrator.getConn();
+			conn = DBHandlerLocal.getConn();
+			//conn = DBHandlerIntegrator.getConn();
 		
 			//* -----------------------------------------------------------------------
 			//Recupera do Request o Codigo do Item (coditem) escolhido pelo usuário
@@ -124,13 +128,18 @@ public class controller03 extends HttpServlet {
 			//* ------------    Salva dados na Session ------------------
 			//* ---------------------------------------------------------
 
-			HttpSession session = request.getSession(); 
-
-			session.setAttribute("codItemEscolhido", codItemEscolhido);
-			session.setAttribute("listagemMontadoras", listagemMontadoras);
-			session.setAttribute("listagemItem", listagemItem);
-			
-			getServletContext().getRequestDispatcher("/jsp03.jsp").forward(request, response);  
+			if (listagemItem.size() == 0) {
+				session.setAttribute("msgerro", "00002");
+				getServletContext().getRequestDispatcher("/jspitem.jsp").forward(request, response);  
+				
+			}
+			else {
+				session.setAttribute("msgerro", " ");
+				session.setAttribute("codItemEscolhido", codItemEscolhido);
+				session.setAttribute("listagemMontadoras", listagemMontadoras);
+				session.setAttribute("listagemItem", listagemItem);
+				getServletContext().getRequestDispatcher("/jsp03.jsp").forward(request, response);  
+			}
 	 
 	}
 	catch (SQLException e) {

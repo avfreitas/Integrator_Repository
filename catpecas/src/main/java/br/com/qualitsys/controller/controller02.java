@@ -43,6 +43,10 @@ public class controller02 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession(); 
+		if (session.getAttribute("usuario") == null)
+			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -53,8 +57,6 @@ public class controller02 extends HttpServlet {
 		//Recupera do Request a Categoria escolhido pelo usuário
 		String codMontadoraEscolhida = request.getParameter("codmontadora");
 		out.println("Montadora escolhida = " + codMontadoraEscolhida);
-
-		HttpSession session = request.getSession(); 
 
 		@SuppressWarnings("unchecked")
 		ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>)session.getAttribute("listaCategorias");
@@ -91,8 +93,8 @@ public class controller02 extends HttpServlet {
 		
 		try {
 			
-			//conn = DBHandlerLocal.getConn();
-			conn = DBHandlerIntegrator.getConn();
+			conn = DBHandlerLocal.getConn();
+			//conn = DBHandlerIntegrator.getConn();
 
 			String preparedSQL = 
 

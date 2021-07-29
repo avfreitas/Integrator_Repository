@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.time.LocalDateTime,java.time.format.DateTimeFormatter"%>
 
 <!DOCTYPE html>
@@ -17,8 +16,8 @@
 	<%!@SuppressWarnings("unchecked")%>
 	<%
 	 
-	 //	if (session.getAttribute("usuario") == null)
-	 //	getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	 	if (session.getAttribute("usuario") == null)
+	 	getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
@@ -42,19 +41,27 @@
 			<hr>
 			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
 			<hr></div>
-						
-		<hr>
+	
 		<div class="container">
 			<p><strong> <font color=blue></font>Entre com o código do item:</strong></p>		
-					<nav class="navbar navbar-light bg-light">
+				<nav class="navbar navbar-light bg-light">
   						<div class="container-fluid">
   							
     						<form class="d-flex" action="controller03">
        							<input class="form-control me-2" type="search" placeholder="Digite aqui o item" aria-label="Search"  name="coditem" id="coditem">
       							<button class="btn btn-outline-success" type="submit">Submit</button>
     						</form></div>
-    						
-					</nav></div>
+ 					
+    						<% 
+								String msgerro = (String) session.getAttribute("msgerro");
+								if (msgerro == null) 
+									session.setAttribute("msgerro"," ");
+								else 
+									if (msgerro.equals("00002") ) 
+										out.print("<div class='alert alert-warning' id = 'msgerro' role='alert'> Desculpe!  Item não encontrado!</div>");
+							%>
+        						
+				</nav></div>
 	 
 		<hr>		
 	 	<div class="container"> 

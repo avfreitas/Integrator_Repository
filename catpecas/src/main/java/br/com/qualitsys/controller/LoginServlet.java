@@ -45,21 +45,23 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession(); 
+	
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
-		HttpSession session = request.getSession(); 
-			
+		
 		String usuario = request.getParameter("usuario");  
 		String password = request.getParameter("password");  
-		 
+	
 		if (validaUser(usuario, password)) {
-			session.setAttribute("usuario", usuario);
-		 		getServletContext().getRequestDispatcher("/jspmain.jsp").include(request, response);
-		 	}
- 		else{
-			out.println("<font color=red>" + "<b> Desculpe, usuário ou password inválidos ! </b>" + "<font color=black>");
-			getServletContext().getRequestDispatcher("/index.jsp").include(request, response);
+				session.setAttribute("usuario", usuario);
+				session.setAttribute("msgerro", " ");
+				getServletContext().getRequestDispatcher("/jspmain.jsp").include(request, response);
+		}
+ 		else {
+ 				out.println("<font color=red>" + "<b> Desculpe, usuário ou password inválidos ! </b>" + "<font color=black>");
+ 				session.setAttribute("msgerro", "00001");
+ 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 		} 
 		out.close(); 
 	}

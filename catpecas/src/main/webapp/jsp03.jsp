@@ -7,13 +7,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Alpha Distribuidora de Peças Ltda.</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+	<meta charset="utf-8">
+	<title>Alpha Distribuidora de Peças Ltda.</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -22,7 +21,7 @@
 	<%
 		if (session.getAttribute("usuario") == null)
 			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
-
+	
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		String dataHoraExecucao = "Execução processada em:   " + dtf.format(now);
@@ -75,24 +74,19 @@
 							out.print("</tr>");	
 					}
 				%>
-				
 				</tbody>
 			</table>
-			
 			<%	
 				out.print("<p>" + "<strong><font color=\"black\">Montadoras: " + "</font></strong></p>"); 
 				for (int i=0; i<listagemMontadoras.size(); i++) {
 	  					out.print("<p><font color=\"black\">" + listagemMontadoras.get(i).toString() + "</font></p>"); 
-	 				}
+	 			}
 			%>
-	
-			<br>
 			<hr>
  			<div class="container"> 
 				<a class="btn btn-primary" href="jspitem.jsp" role="button">Retorna</a>
 				<hr><br>
 				<a class="btn btn-danger" href="jspfim.jsp" role="button">Logout</a></div>	
-
 		</div>
 	</div>
 
