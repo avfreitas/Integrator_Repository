@@ -67,10 +67,11 @@
 				
 		<div class="container"> 
 				<p><% out.print("<b><font color='black'>Escolha a consulta desejada: </font></b>");%></p>
-				<a class="btn btn-primary" href="jspitem.jsp" role="button">Item interno</a>
+				<a class="btn btn-primary" href="jspitem.jsp" role="button">Código interno</a>
+				<a class="btn btn-success" href="jspdesc.jsp" role="button">Descrição do Item</a>
+				<a class="btn btn-primary" href="jspcodoriginal.jsp" role="button">Código Original</a>
 				<a class="btn btn-success" href="controller01" role="button">Categoria/Montadora</a> 	
-				<a class="btn btn-primary" href="controller04" role="button">Montadora</a> 
-				<a class="btn btn-success" href="jspcodoriginal.jsp" role="button">Código Original</a></div>
+				<a class="btn btn-primary" href="controller04" role="button">Montadora</a></div>
 				<br>	
 		<hr>
 		

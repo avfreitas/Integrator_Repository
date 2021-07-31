@@ -85,9 +85,9 @@
 							out.print("<tr>");	
 							out.print("<td><p><img src=" + "imagens/"+ listagemCodigosOriginais.get(i).getCoditem() + ".JPG />" + "</td>");
 							
-							out.print("<td><p>" + listagemCodigosOriginais.get(i).getCoditem() + "  /  ");
+							out.print("<td><p>" + listagemCodigosOriginais.get(i).getCoditem());
 							if (mercadoparalelo.equals("s"))  
-								out.print("   " + listagemCodigosOriginais.get(i).getCoditem() + "A" + "</td>");
+								out.print(" / " + listagemCodigosOriginais.get(i).getCoditem() + "A" + "</td>");
 							else 
 								out.print("</td>"); 
 						

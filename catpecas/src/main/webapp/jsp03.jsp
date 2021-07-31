@@ -101,10 +101,10 @@
 							out.print("<tr>");	
 							out.print("<td><p><img src=" + adrImagem + " />" + "</td>");
 							
-							out.print("<td><p>" +  codItemEscolhido + "  /  ");
+							out.print("<td><p>" +  codItemEscolhido);
 							
 							if (listagemItem.get(i).getMercadoparalelo().equals("s"))  
-								out.print("   " + codItemEscolhido + "A" + "</td>");
+								out.print(" / " + codItemEscolhido + "A" + "</td>");
 							else 
 								out.print("</td>"); 
 							

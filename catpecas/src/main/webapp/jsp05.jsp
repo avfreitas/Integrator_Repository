@@ -65,9 +65,9 @@
 							
 							out.print("<td><p>" + listagemItens.get(i).getDescmontadora() + "</td>");
 							
-							out.print("<td><p>" +  listagemItens.get(i).getCoditem()+ "  /  ");
+							out.print("<td><p>" +  listagemItens.get(i).getCoditem());
 							if (listagemItens.get(i).getMercadoparalelo().equals("s"))  
-								out.print("   " + listagemItens.get(i).getCoditem() + "A" + "</td>");
+								out.print(" / " + listagemItens.get(i).getCoditem() + "A" + "</td>");
 							else 
 								out.print("</td>"); 
 							
