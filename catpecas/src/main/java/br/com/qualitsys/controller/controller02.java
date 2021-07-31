@@ -1,7 +1,6 @@
 package br.com.qualitsys.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,14 +18,15 @@ import br.com.qualitsys.model.Categoria;
 import br.com.qualitsys.model.Montadora;
 import br.com.qualitsys.model.ResultJoin;
 
-//*------------------------------------------------------------------
-//*-- Salva na Session =>  atributo: "listagemItens" 
-//*-- Salva na Session =>  atributo: "nomeCategoriaEscolhida" 
-//*-- Salva na Session =>  atributo: "nomeMontadoraEscolhida" 
-//*-- Salva na Session =>  atributo: "codCategoriaEscolhida" 
-//*-- Salva na Session =>  atributo: "codMontadoraEscolhida" 
-//*------------------------------------------------------------------
-
+//*-------------------------------------------------------------------------------------------------
+//*--------------------------------       Módulo controller02   ------------------------------------
+//*-------------------------------------------------------------------------------------------------
+//*------------------ Salva na Session =>  atributo: "listagemItens1" -------------------------------
+//*------------------ Salva na Session =>  atributo: "nomeCategoriaEscolhida1" ----------------------
+//*------------------ Salva na Session =>  atributo: "nomeMontadoraEscolhida1" ----------------------
+//*------------------ Salva na Session =>  atributo: "codCategoriaEscolhida1" -----------------------
+//*------------------ Salva na Session =>  atributo: "codMontadoraEscolhida1" -----------------------
+//*--------------------------------------------------------------------------------------------------
 
 @WebServlet("/controller02")
 public class controller02 extends HttpServlet {
@@ -43,58 +43,70 @@ public class controller02 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//* ---------------------------------------------------------------------------------------
+		//* ---------  Bloqueia chamada direta desse servlet pelo usuário -------------------------
+		//* ---------------------------------------------------------------------------------------
+		
 		HttpSession session = request.getSession(); 
 		if (session.getAttribute("usuario") == null)
 			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html;charset=UTF-8");
-
-		//Recupera do Request a Categoria escolhido pelo usuário
-		String codCategoriaEscolhida = request.getParameter("codcategoria");
-		out.println("Categoria escolhida = " + codCategoriaEscolhida);
-
-		//Recupera do Request a Categoria escolhido pelo usuário
-		String codMontadoraEscolhida = request.getParameter("codmontadora");
-		out.println("Montadora escolhida = " + codMontadoraEscolhida);
+		//*-----------------------------------------------------------------------------------------
+		//*--------------     Recupera do Request a Categoria escolhido pelo usuário ---------------
+		//*-----------------------------------------------------------------------------------------
+		String codCategoriaEscolhida1 = request.getParameter("codcategoria1");
+	
+		//*-----------------------------------------------------------------------------------------
+		//*--------------     Recupera do Request a Montadora escolhido pelo usuário ---------------
+		//*-----------------------------------------------------------------------------------------
+		String codMontadoraEscolhida1 = request.getParameter("codmontadora1");
+		
+		//*-----------------------------------------------------------------------------------------
+		//*--------------     Recupera da Session a lista de Categorias ----------------------------
+		//*-----------------------------------------------------------------------------------------
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<Categoria> listaCategorias1 = (ArrayList<Categoria>)session.getAttribute("listaCategorias1");
+		
+		//*-----------------------------------------------------------------------------------------
+		//*--------------     Recupera da Session a lista de Montadoras ----------------------------
+		//*-----------------------------------------------------------------------------------------
 
 		@SuppressWarnings("unchecked")
-		ArrayList<Categoria> listaCategorias = (ArrayList<Categoria>)session.getAttribute("listaCategorias");
-		@SuppressWarnings("unchecked")
-		ArrayList<Montadora> listaMontadoras = (ArrayList<Montadora>)session.getAttribute("listaMontadoras");
+		ArrayList<Montadora> listaMontadoras1 = (ArrayList<Montadora>)session.getAttribute("listaMontadoras1");
 
-		//* ------------------------------------------------
-		//* --  Recupera nome da Categoria escolhida  ------
-		//* ------------------------------------------------
+		//* -----------------------------------------------------------------------------------------
+		//* ----------       Define nome da Categoria escolhida  ----------------------------------
+		//* -----------------------------------------------------------------------------------------
 
-		String nomeCategoriaEscolhida = null;
-		int size1 = listaCategorias.size();
+		String nomeCategoriaEscolhida1 = null;
+		int size1 = listaCategorias1.size();
 
 		for (int i=0; i<size1;i++)  
-			if(listaCategorias.get(i).getCodCategoria().equals(codCategoriaEscolhida)) {
-				nomeCategoriaEscolhida = listaCategorias.get(i).getDescCategoria();
+			if(listaCategorias1.get(i).getCodCategoria().equals(codCategoriaEscolhida1)) {
+				nomeCategoriaEscolhida1 = listaCategorias1.get(i).getDescCategoria();
 				break;
 			}
 
-		//* ------------------------------------------------
-		//* --  Recupera nome da Montadora escolhida  ------
-		//* ------------------------------------------------
+		//*------------------------------------------ ------------------------------------------------
+		//* -------------  Define nome da Montadora escolhida  -------------------------------------
+		//* ------------------------------------------------------------------------------------------
 
-		String nomeMontadoraEscolhida = null;
-		int size2 = listaMontadoras.size();
+		String nomeMontadoraEscolhida1 = null;
+		int size2 = listaMontadoras1.size();
 
 		for (int i=0; i<size2;i++)  
-			if(listaMontadoras.get(i).getCodMontadora().equals(codMontadoraEscolhida)) {
-				nomeMontadoraEscolhida = listaMontadoras.get(i).getDescMontadora();
+			if(listaMontadoras1.get(i).getCodMontadora().equals(codMontadoraEscolhida1)) {
+				nomeMontadoraEscolhida1 = listaMontadoras1.get(i).getDescMontadora();
 				break;
 			}
-
+			
 		Connection conn;
 		
 		try {
 			
-			conn = DBHandlerLocal.getConn();
-			//conn = DBHandlerIntegrator.getConn();
+			//conn = DBHandlerLocal.getConn();
+			conn = DBHandlerIntegrator.getConn();
 
 			String preparedSQL = 
 
@@ -112,17 +124,16 @@ public class controller02 extends HttpServlet {
 							"ON  T.coditem = MI.coditem " +  
 
 							"INNER JOIN montadora M " + 
-							"ON  M.codmontadora =? " +
+							"ON  M.codmontadora = MI.codmontadora " +
 
-							"where T.codcategoria =?  " +    
+							"where T.codcategoria =?  and M.codmontadora = ?" +    
 							"ORDER BY T.coditem , M.descmontadora " ; 
 
 			PreparedStatement ps = conn.prepareStatement(preparedSQL);
 
-			ps.setString(1, codMontadoraEscolhida);
-			ps.setString(2, codCategoriaEscolhida);
+			ps.setString(1, codCategoriaEscolhida1);
+			ps.setString(2, codMontadoraEscolhida1);
 			
-
 			ResultSet rs = ps.executeQuery();
 
 			String descmontadora; 
@@ -132,9 +143,8 @@ public class controller02 extends HttpServlet {
 			Object imagemitem;
 			String codigosoriginais;
 
-			ArrayList<ResultJoin> listagemItens = new ArrayList<ResultJoin>();
+			ArrayList<ResultJoin> listagemItens1 = new ArrayList<ResultJoin>();
 		
-
 			while (rs.next() ) {
 
 				descmontadora = rs.getString(1);
@@ -147,30 +157,42 @@ public class controller02 extends HttpServlet {
 				ResultJoin rj = new 
 						ResultJoin(descmontadora, mercadoparalelo, coditem, descitem, imagemitem, codigosoriginais); 
 
-				listagemItens.add(rj);
+				listagemItens1.add(rj);
 			}
 			
-			//* ----------------------------------------------------------------
+			//* ---------------------------------------------------------
+			//*----------  Fechamento de conexões com o SGBD  -----------
+			//* ---------------------------------------------------------
 
 			ps.close();
 			rs.close();
 			conn.close();
 
-			//*-------------------------------------------------------------------
-			//* ------------    Salva dados na Session ---------------------------
-			//* ------------------------------------------------------------------
-
-			session.setAttribute("listagemItens", listagemItens);
-			session.setAttribute("nomeCategoriaEscolhida", nomeCategoriaEscolhida);
-			session.setAttribute("nomeMontadoraEscolhida", nomeMontadoraEscolhida);
-			session.setAttribute("codCategoriaEscolhida", codCategoriaEscolhida);
-			session.setAttribute("codMontadoraEscolhida", codMontadoraEscolhida);
-				 
-			getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);  
+			//*----------------------------------------------------------------------------------------------
+			//* ------- Salva dados na Session --------------------------------------------------------------
+			//* ------- View jsp01 será chamada com condição de erro 00005 se não houver itens --------------
+			//*-------- View jsp02 será chamda para exibir os dados dos itens selecionados ------------------
+			//* ---------------------------------------------------------------------------------------------
+			
+			session.setAttribute("listagemItens1", listagemItens1);
+			session.setAttribute("nomeCategoriaEscolhida1", nomeCategoriaEscolhida1);
+			session.setAttribute("nomeMontadoraEscolhida1", nomeMontadoraEscolhida1);
+			session.setAttribute("codCategoriaEscolhida1", codCategoriaEscolhida1);
+			session.setAttribute("codMontadoraEscolhida1", codMontadoraEscolhida1);
+			
+		
+			if (listagemItens1.size() == 0) {
+				session.setAttribute("msgerro", "00005");
+				getServletContext().getRequestDispatcher("/jsp01.jsp").forward(request, response);  
+			}
+			
+			else 	
+				getServletContext().getRequestDispatcher("/jsp02.jsp").forward(request, response);  
 		
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	
 	}
 }

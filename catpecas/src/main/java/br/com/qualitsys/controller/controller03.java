@@ -1,7 +1,6 @@
 package br.com.qualitsys.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,11 +16,20 @@ import javax.servlet.http.HttpSession;
 
 import br.com.qualitsys.model.ResultJoinItem;
 
-//*------------------------------------------------------------------
-//*-- Salva na Session =>  atributo: codItemEscolhido
-//*-- Salva na Session =>  atributo: listagemItem
-//*-- Salva na Session =>  atributo: listagemMontadoras
-//*------------------------------------------------------------------
+//*-------------------------------------------------------------------------------------------------
+//*------------       Módulo controller03        ---------------------------------------------------
+//*-------------------------------------------------------------------------------------------------
+//*---
+//*------------       Salva na Session =>  atributo: codItemEscolhido ------------------------------
+//*------------       Salva na Session =>  atributo: listagemItem ----------------------------------
+//*------------       Salva na Session =>  atributo: listagemMontadoras ----------------------------
+//*------------       Salva na Session =>  atributo: "msgerro"  c/código "00002" -------------------
+//*--- 
+//*--- 
+//*-----------        Se item existe =====>  chama view jsp03 --------------------------------------
+//*-----------        Se item não existe =>  chama view: jspitem com msgerro = "00002" -------------
+//*-------------------------------------------------------------------------------------------------
+
 
 @WebServlet("/controller03")
 public class controller03 extends HttpServlet {
@@ -38,27 +46,28 @@ public class controller03 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
+		//* -----------------------------------------------------------------------------
+		//* ---------  Bloqueia chamada direta desse servlet pelo usuário ---------------
+		//* -----------------------------------------------------------------------------
+			
 		HttpSession session = request.getSession(); 
 		if (session.getAttribute("usuario") == null)
 			getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
 		
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html;charset=UTF-8");
-
 		Connection conn;
 		
 		try {
 			
-			conn = DBHandlerLocal.getConn();
-			//conn = DBHandlerIntegrator.getConn();
+			//conn = DBHandlerLocal.getConn();
+			conn = DBHandlerIntegrator.getConn();
 		
 			//* -----------------------------------------------------------------------
 			//Recupera do Request o Codigo do Item (coditem) escolhido pelo usuário
 			//* -----------------------------------------------------------------------
 
 			String codItemEscolhido = request.getParameter("coditem");
-			out.println("Item escolhido = " + codItemEscolhido);
-
+		
 			//* ------------------------------------------------------------------------------
 			//* ------    Recupera Descrição do item escolhido pelo usuário  
 			//* ------------------------------------------------------------------------------

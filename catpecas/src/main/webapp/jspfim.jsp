@@ -28,7 +28,7 @@
 			<hr>
 			<p>Rua João Gottfritz Filho, 75 - Jardim Regis - São Paulo - SP</p>
 			<p>Fones:   11 5662-8252  / 11 3459-7128</p>
-			<p>WhatAapp:   11 99766-2438 / 11 93087-5039</p>
+			<p>WhatsApp:   11 99766-2438 / 11 93087-5039</p>
 			<hr>
 			<p><strong>Catálogo Eletrônico de Peças</strong></p>
 			<p> <% out.print(dataHoraExecucao); %> </p>

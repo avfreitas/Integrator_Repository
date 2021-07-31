@@ -15,7 +15,7 @@
 <body>
 
 	<!-- ----------------------------------------------------------------------------   -->
-	<!-- ------------- Preparação do Cabeçalho da Página jspitem.jsp ----------------   -->
+	<!-- ------------- Preparação do Cabeçalho da Página jspcodoriginal.jsp ----------------   -->
 	<!-- ----------------------------------------------------------------------------   -->
 
 
@@ -52,25 +52,25 @@
 			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
 			<hr></div>
 	
-		<!-- --------------------------------------------------------------------------   -->
-		<!-- --------- Form para envio do campos coditem (código do item  -------------   -->
-		<!-- --------- Essa view (jspitem.jsp) chama o servlet: controller03 ----------   -->
-		<!-- --------- campo coditem enviado pelo request ao controller03  ------------   -->
-		<!-- --------------------------------------------------------------------------   -->	
+		<!-- ---------------------------------------------------------------------------------   -->
+		<!-- --------- Form para envio do campo de pesquisa searchcodoriginal   --------------   -->
+		<!-- --------- Essa view (jspcodoriginal.jsp) chama o servlet: controller07 ----------   -->
+		<!-- --------- campo searchcodoriginal enviado pelo request ao controller07 ----------   -->
+		<!-- ---------------------------------------------------------------------------------   -->	
 	
 		<div class="container">
-			<p><strong> <font color=blue></font><font color=black>Entre com o código do item:</font></strong></p>		
+			<p><strong> <font color=blue></font><font color=black>Entre com o código original:</font></strong></p>		
 				<nav class="navbar navbar-light bg-light">
   						<div class="container-fluid"> 
   							
-    						<form class="d-flex" action="controller03">
-       							<input class="form-control me-2" type="search" placeholder="Digite aqui o item" aria-label="Search" name="coditem" id="coditem">
+    						<form class="d-flex" action="controller07">
+       							<input class="form-control me-2" type="search" placeholder="Digite aqui" aria-label="Search" name="searchcodoriginal" id="codoriginal">
       							<button class="btn btn-outline-success" type="submit">Submit</button> </form></div>
  							
  							<!-- --------------------------------------------------------------------------   -->
-							<!-- -------- Tratamento de Erro de Login   -----------------------------------   -->
+							<!-- -------- Tratamento de Erro de Código Original ---------------------------   -->
 							<!-- -------- Variável de Controle manipulada na Session: msgerro  ------------   -->
-							<!-- -------- msgerro = '00002' =>  Item não encontrado!  ---------------------   -->
+							<!-- -------- msgerro = '00007' =>  Código original não encontrado!  ----------   -->
 							<!-- --------------------------------------------------------------------------   -->	
  					
     						<% 
@@ -78,8 +78,8 @@
 								if (msgerro == null) 
 									session.setAttribute("msgerro"," ");
 								else 
-									if (msgerro.equals("00002") ) {
-										out.print("<div class='alert alert-warning' id = 'msgerro' role='alert'><b><font color='red'>Desculpe!  Item não encontrado ! " +"</font></b><br>");
+									if (msgerro.equals("00007") ) {
+										out.print("<div class='alert alert-warning' id = 'msgerro' role='alert'><b><font color='red'>Itens não encontrados para esse código original!" +"</font></b><br>");
 										session.setAttribute("msgerro"," ");
 									}
 							%>

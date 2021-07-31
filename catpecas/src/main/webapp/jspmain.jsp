@@ -13,11 +13,21 @@
 </head>
 
 <body>
+
+	<!-- ----------------------------------------------------------------------------   -->
+	<!-- ------------- Preparação do Cabeçalho da Página jspmain.jsp ----------------   -->
+	<!-- ----------------------------------------------------------------------------   -->
+
 	<%!@SuppressWarnings("unchecked")%>
 	<%
 	 
+		//* -----------------------------------------------------------------------------
+		//* ---------  Bloqueia chamada direta dessa view pelo usuário ------------------
+		//* ------------------------------------------------------------------------------
+		
 	 	if (session.getAttribute("usuario") == null)
-	 	getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	 		getServletContext().getRequestDispatcher("/jsperrologin.jsp").forward(request, response);
+	
 
 		session.setAttribute("msgerro"," ");
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm:ss");
@@ -35,21 +45,47 @@
 			<hr>
 			<p>Rua João Gottfritz Filho, 75 - Jardim Regis - São Paulo - SP</p>
 			<p>Fones:   11 5662-8252  / 11 3459-7128</p>
-			<p>WhatAapp:   11 99766-2438 / 11 93087-5039</p>
+			<p>WhatsApp:   11 99766-2438 / 11 93087-5039</p>
 			<hr>
 			<p><strong>Catálogo Eletrônico de Peças</strong></p>
-			<p> <% out.print(dataHoraExecucao); %> </p>
+			<p><% out.print(dataHoraExecucao); %></p>
 			<hr>
-			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</b>");%></p>
+			<p><% out.print("Usuário logado: <b> <font color=\"blue\">" + session.getAttribute("usuario") + "</font></b>");%></p>
 			<hr></div>
 			
+	
+		<!-- --------------------------------------------------------------------------   -->
+		<!-- --------- div para botões de chamadas de funcionalidades do sistema ------   -->
+		<!-- --------- Funcionalidades: consulta pelo item, consulta pela categoria ---   -->
+		<!-- ---------                  consulta pela montadora -----------------------   -->
+		<!-- ---------                  e consulta pelo código original    ------------   -->
+		<!-- --------------------------------------------------------------------------   -->	
+		<!-- ------ Chamadas das views:  jspitem  -------------------------------------   -->
+		<!-- ------ Chamadas dos controllers:  controller01 e controller04 ------------   -->
+		<!-- --------------------------------------------------------------------------   -->
+	
+				
 		<div class="container"> 
-				<a class="btn btn-primary " href="jspitem.jsp" role="button">Consulta pelo item da peça</a>
-				<a class="btn btn-success " href="controller01" role="button">Consulta pela categoria/montadora</a></div>	
-		<hr>		
+				<p><% out.print("<b><font color='black'>Escolha a consulta desejada: </font></b>");%></p>
+				<a class="btn btn-primary" href="jspitem.jsp" role="button">Item interno</a>
+				<a class="btn btn-success" href="controller01" role="button">Categoria/Montadora</a> 	
+				<a class="btn btn-primary" href="controller04" role="button">Montadora</a> 
+				<a class="btn btn-success" href="jspcodoriginal.jsp" role="button">Código Original</a></div>
+				<br>	
+		<hr>
+		
+		
+		
+		<!-- --------------------------------------------------------------------------   -->
+		<!-- --------- Form para botão de Logout  -------------------------------------   -->
+		<!-- --------- Se Botão Logout pressionado => chama a view: jspfim ------------   -->
+		<!-- --------------------------------------------------------------------------   -->	
+				
 		<div class="container">
 					<form class="form-inline" action="jspfim.jsp">
-						<button type="submit" class="btn btn-danger">Logout</button></form></div>		
+						<button type="submit" class="btn btn-danger">Logout</button></form></div>	
+						
+							
     </div>
 </body>
 </html>

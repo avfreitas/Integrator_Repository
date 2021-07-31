@@ -19,7 +19,7 @@
 <body>
 
 	<!-- ----------------------------------------------------------------------------   -->
-	<!-- ------------- Preparação do Cabeçalho da Página jsp02.jsp ------------------   -->
+	<!-- ------------- Preparação do Cabeçalho da Página jsp06.jsp ------------------   -->
 	<!-- ----------------------------------------------------------------------------   -->
 
 	<%!@SuppressWarnings("unchecked")%>
@@ -52,24 +52,11 @@
 			<hr>
 				
 			<!-- ------------------------------------------------------------------------------------------   -->
-			<!-- --------- Recupera da Session a listagem de itens a serem exibidas ao usuário ------------   -->
+			<!-- --------- Recupera da Session a listagem de itens com códigos originais selecionados -----   -->
 			<!-- ------------------------------------------------------------------------------------------   -->
 			
-			<% ArrayList<ResultJoin> listagemItens1 = (ArrayList<ResultJoin>) session.getAttribute("listagemItens1"); %>
+			<% ArrayList<ResultJoin> listagemCodigosOriginais = (ArrayList<ResultJoin>) session.getAttribute("listagemCodigosOriginais"); %>
 		
-			<!-- -----------------------------------------------------------------------------   -->
-			<!-- --------- Recupera nome da Categoria Escolhida pelo usuário    --------------   -->
-			<!-- -----------------------------------------------------------------------------   -->
-			
-			<p><%out.print("<font color='black'>Categoria: </font><font color='green'><b>" + session.getAttribute("nomeCategoriaEscolhida1") + "</b></font>");%></p>
-			
-			<!-- -----------------------------------------------------------------------------   -->
-			<!-- --------- Recupera nome da Montadora Escolhida pelo usuário    --------------   -->
-			<!-- -----------------------------------------------------------------------------   -->
-			
-			<p><%out.print("<font color='black'>Montadora: </font><font color='green'><b>" + session.getAttribute("nomeMontadoraEscolhida1") + "</b></font>");%></p>
-			<br>
-	
 			<!-- -----------------------------------------------------------------------------   -->
 			<!-- --------- Tabela para exibição dos itens selecionados pelo usuário     ------   -->
 			<!-- -----------------------------------------------------------------------------   -->
@@ -79,7 +66,9 @@
 					<tr>
 						<th scope="col">Item</th>
 						<th scope="col">Código</th>
+						<th scope='col'>Montadora</th>
 						<th scope="col">Descrição</th>
+						<th scope="col">Códigos Originais</th>
 					</tr>
 				
 				</thead>
@@ -87,22 +76,24 @@
 				<tbody>
 					<%
 	
-						int n = listagemItens1.size();
+						int n = listagemCodigosOriginais.size();
 					
 						for (int i = 0; i < n; i++) {
 											
-							String mercadoparalelo = listagemItens1.get(i).getMercadoparalelo();
+							String mercadoparalelo = listagemCodigosOriginais.get(i).getMercadoparalelo();
 							
 							out.print("<tr>");	
-							out.print("<td><p><img src=" + "imagens/"+ listagemItens1.get(i).getCoditem() + ".JPG />" + "</td>");
+							out.print("<td><p><img src=" + "imagens/"+ listagemCodigosOriginais.get(i).getCoditem() + ".JPG />" + "</td>");
 							
-							out.print("<td><p>" + listagemItens1.get(i).getCoditem() + "  /  ");
+							out.print("<td><p>" + listagemCodigosOriginais.get(i).getCoditem() + "  /  ");
 							if (mercadoparalelo.equals("s"))  
-								out.print("   " + listagemItens1.get(i).getCoditem() + "A" + "</td>");
+								out.print("   " + listagemCodigosOriginais.get(i).getCoditem() + "A" + "</td>");
 							else 
 								out.print("</td>"); 
 						
-							out.print("<td><p>" + listagemItens1.get(i).getDescitem() + "</td>");
+							out.print("<td><p>" + listagemCodigosOriginais.get(i).getDescmontadora() + "</td>");
+							out.print("<td><p>" + listagemCodigosOriginais.get(i).getDescitem() + "</td>");
+							out.print("<td><p>" + listagemCodigosOriginais.get(i).getCodigosoriginais() + "</td>");
 							out.print("</tr>");	
 						}
 					%>
@@ -119,7 +110,7 @@
 			<!-- --------------------------------------------------------------------------   -->			
 	
 			<div class="container"> 
-				<a class="btn btn-primary" href="jsp01.jsp" role="button">Retorna</a>
+				<a class="btn btn-primary" href="jspcodoriginal.jsp" role="button">Retorna</a>
 				<hr><br>
 				<a class="btn btn-danger" href="jspfim.jsp" role="button">Logout</a></div>	
 		</div>
